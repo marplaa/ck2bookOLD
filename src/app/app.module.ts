@@ -8,6 +8,9 @@ import { TestComponent } from './test/test.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     BrowserAnimationsModule,
     DragDropModule,
-    NgbModule
+    NgbModule,
+    CdkTreeModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
