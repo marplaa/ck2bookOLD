@@ -11,12 +11,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { RecipeComponent } from './recipe/recipe.component';
+import { QuillModule } from 'ngx-quill';
+import {FormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
-    RecipesListComponent
+    RecipesListComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +31,8 @@ import {MatButtonModule} from '@angular/material/button';
     CdkTreeModule,
     MatIconModule,
     MatButtonModule,
+    QuillModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
