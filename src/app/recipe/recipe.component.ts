@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../recipes-node';
+import { RecipesService } from '../recipes.service';
 
 
 @Component({
@@ -13,10 +14,15 @@ export class RecipeComponent implements OnInit {
   modules = {toolbar: [
       ['bold', 'italic', 'underline', 'strike']]
   };
+  model: string;
 
-  constructor() { }
+  constructor(private recipesService: RecipesService) { }
 
   ngOnInit(): void {
+  }
+
+  outputContent(): void {
+    console.log(this.model);
   }
 
 

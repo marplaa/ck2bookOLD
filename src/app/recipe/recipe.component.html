@@ -1,7 +1,9 @@
 <div *ngIf="recipe">
-  <input [(ngModel)]="recipe.title" placeholder="Titel"/>
+  <input class="form-control" type="text" placeholder="Default input" [(ngModel)]="recipe.title" style="margin-bottom: 10px">
 
+  <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
 </div>
 
+<button (click)="outputContent()">out</button>
 
-<quill-editor [modules]="modules"></quill-editor>
+

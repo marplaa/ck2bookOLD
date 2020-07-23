@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { RecipeComponent } from './recipe/recipe.component';
 import { QuillModule } from 'ngx-quill';
 import {FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import {FormsModule} from '@angular/forms';
     MatIconModule,
     MatButtonModule,
     QuillModule.forRoot(),
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
