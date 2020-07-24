@@ -1,8 +1,8 @@
 import {RecipesNode} from './recipes-node';
 
-export const Recipes: RecipesNode[] =
+export const Recipes: RecipesNode =
 
-[
+
   {
     id: '00000',
     title: 'root',
@@ -44,4 +44,4 @@ export const Recipes: RecipesNode[] =
     ]
   }
 
-];
+;

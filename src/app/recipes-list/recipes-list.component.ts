@@ -14,11 +14,11 @@ import { Md5 } from 'ts-md5';
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: RecipesNode[] = Recipes;
+  recipes: RecipesNode = Recipes;
   recipe: Recipe;
 
   treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
-  dataSource = new ArrayDataSource(this.recipes);
+  dataSource = new ArrayDataSource(this.recipes.children);
 
   constructor(private recipesService: RecipesService, private modalService: NgbModal) { }
 
@@ -32,6 +32,12 @@ export class RecipesListComponent implements OnInit {
     this.recipe = recipe;
   }
 
+  updateTreeView(): void{
+    data = this.dataSource._data;
+    this.dataSource._data = null;
+    this.dataSource._data = data;
+  }
+
   addRecipe(chapter: RecipesNode): void {
     this.recipesService.getRecipe('https://www.chefkoch.de/rezepte/692211171805380/Blaetterteig-mit-Tomate-Zucchini-und-Feta.html')
       .subscribe(recipe => {this.recipe = recipe; chapter.children.push(recipe); console.log(chapter); } );
@@ -43,6 +49,7 @@ export class RecipesListComponent implements OnInit {
       title,
     };
     chapter.children.push(newChapter);
+    this.updateTreeView();
   }
 
   showChapter(chapterID: string): void {
@@ -57,7 +64,7 @@ export class RecipesListComponent implements OnInit {
 
   getNodeByIdRec(id: string[]): RecipesNode{
     if (id.length === 1) {
-      return this.recipes[0]; // chapter.children.find(chptr => chptr.id === id.join('-'));
+      return this.recipes; // chapter.children.find(chptr => chptr.id === id.join('-'));
     }
     const parentChapter = this.getNodeByIdRec(id.slice(0, id.length - 1 ));
     return parentChapter.children.find(chptr => chptr.id === id.join('-'));
