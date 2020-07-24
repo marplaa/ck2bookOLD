@@ -16,6 +16,8 @@ export class RecipesListComponent implements OnInit {
 
   recipes: RecipesNode = Recipes;
   recipe: Recipe;
+  chapter: RecipesNode = {id: '', title: '', children: []};
+  newChapterTitle = '';
 
   treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
   dataSource = new ArrayDataSource(this.recipes.children);
@@ -26,7 +28,7 @@ export class RecipesListComponent implements OnInit {
   }
 
 
-  hasChild = (_: number, node: RecipesNode) => !!node.children && node.children.length > 0;
+  hasChild = (node: RecipesNode) => !!node.children && node.children.length > 0;
 
   selectRecipe(recipe: Recipe): void  {
     this.recipe = recipe;
@@ -41,13 +43,25 @@ export class RecipesListComponent implements OnInit {
       .subscribe(recipe => {this.recipe = recipe; chapter.children.push(recipe); console.log(chapter); } );
   }
 
-  addChapter(chapter: RecipesNode, title: string): void {
+  /*
+  * Adds a new chapter to the recipes tree.
+  *
+  * chapter: parent chapter to add the new chapter to
+  *
+  * */
+  addChapter(chapter: RecipesNode): void {
+    let newId = 'x';
+    do {
+      newId = chapter.id + '-' + Md5.hashStr(this.newChapterTitle + newId).toString().substr(0, 3);
+    } while (chapter.children.find(node => node.id === newId ));
+
     const newChapter = {
-      id: chapter.id + '-' + Md5.hashStr(title),
-      title,
+      id: newId,
+      title: this.newChapterTitle,
+      children: []
     };
     chapter.children.push(newChapter);
-    this.updateTreeView();
+    this.newChapterTitle = '';
   }
 
   showChapter(chapterID: string): void {
@@ -82,9 +96,15 @@ export class RecipesListComponent implements OnInit {
   }
 
   openNewChapterModal(content, chapter): void {
+    this.chapter = chapter;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      if (result === 's') {this.addChapter(chapter, 'test'); }
+      if (result === 's') {this.addChapter(chapter); }
     });
   }
+
+  isRecipe(node: RecipesNode): boolean {
+    return !node.children;
+  }
+
 
 }

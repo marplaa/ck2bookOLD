@@ -17,8 +17,18 @@
 }
 
 .recipes-list-wrapper {
-  margin: 4px;
+  margin: 0px 4px;
   padding-right: 5px;
   border-radius: 5px;
-  border: 1px solid grey;
+  border: 1px solid lightgray;
+}
+
+.tree li {
+  margin: 24px 0px 24px 20px;
+
+
+}
+
+.tree ul {
+  padding-left: 12px;
 }

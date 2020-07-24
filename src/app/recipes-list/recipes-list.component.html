@@ -2,20 +2,54 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-8">
 
       <div class="recipes-list-wrapper">
+        <div class="tree">
+
+
+
 
         <ul>
           <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: recipes.children }"></ng-container>
         </ul>
 
         <ng-template #recursiveListTmpl let-list="recipes">
-          <li *ngFor="let item of list">
-            {{ item.title }}
-            <ul *ngIf="item.children.length > 0">
-              <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: item.children }"></ng-container>
-            </ul>
+          <li *ngFor="let node of list">
+            <!--
+            is recipe or chapter?
+            -->
+            <ng-container *ngIf="isRecipe(node); else isChapter">
+              <a (click)="selectRecipe(node)">{{node.title}}</a>
+            </ng-container>
+            <ng-template #isChapter>
+              {{node.title}}
+              <div class="float-right">
+                <button mat-icon-button (click)="addRecipe(getNodeById(node.id))">
+                  <mat-icon>
+                    note_add
+                  </mat-icon>
+                </button>
+                <button mat-icon-button (click)="openNewChapterModal(newChapterModal, getNodeById(node.id))">
+                  <mat-icon>
+                    book
+                  </mat-icon>
+                </button>
+                <button mat-button (click)="showChapter(node.id)">test</button>
+
+              </div>
+
+
+
+              <ul *ngIf="hasChild(node)">
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: node.children }"></ng-container>
+              </ul>
+
+
+
+            </ng-template>
+
+
           </li>
         </ng-template>
 
@@ -55,9 +89,10 @@
             </div>
           </cdk-nested-tree-node>
         </cdk-tree>-->
+        </div>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-4">
       <app-recipe [recipe]="recipe"></app-recipe>
     </div>
   </div>
@@ -65,9 +100,9 @@
 </div>
 
 
-<ng-template #content let-modal>
+<ng-template #newChapterModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <h4 class="modal-title" id="modal-basic-title">Neues Kapitel unter "{{chapter.title}}" erstellen</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -75,12 +110,9 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="dateOfBirth">Date of birth</label>
+        <label for="newChapterTitle">Neues Kapitel</label>
         <div class="input-group">
-          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-          </div>
+          <input class="form-control" id="newChapterTitle" type="text" placeholder="Titel des neuen Kapitels" name="newChapterName" [(ngModel)]="newChapterTitle" style="margin-bottom: 10px">
         </div>
       </div>
     </form>

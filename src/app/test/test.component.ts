@@ -11,22 +11,22 @@ import {Recipes} from '../skeleton';
 })
 export class TestComponent implements OnInit {
 
-  recipes: RecipesNode[] = Recipes;
+  // recipes: RecipesNode[] = Recipes;
 
-  treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
-  dataSource = new ArrayDataSource(this.recipes);
+  // treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
+  // dataSource = new ArrayDataSource(this.recipes);
 
   constructor() { }
 
   ngOnInit(): void {
-    this.createRecipes();
+    // this.createRecipes();
   }
 
   createRecipes(): void {
-    const recipe: Recipe = {images: [], title: 'tresssst', ingredients: [], image: ''};
-    recipe.title = 'test title';
-    this.recipes[0].children.push(recipe);
-    console.log(this.recipes);
+    // const recipe: Recipe = {images: [], title: 'tresssst', ingredients: [], image: ''};
+    // recipe.title = 'test title';
+   // this.recipes[0].children.push(recipe);
+   // console.log(this.recipes);
   }
 
   hasChild = (_: number, node: RecipesNode) => !!node.children && node.children.length > 0;
