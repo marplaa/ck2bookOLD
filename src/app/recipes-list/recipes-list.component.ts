@@ -46,17 +46,22 @@ export class RecipesListComponent implements OnInit {
   }
 
   showChapter(chapterID: string): void {
-    const chapter = this.getNodeByID(this.recipes[0], chapterID.split('-'));
+    const chapter = this.getNodeById(chapterID);
     alert(chapter.title);
   }
 
-  getNodeByID(chapter: RecipesNode, id: string[]): RecipesNode{
+  getNodeById(id: string): RecipesNode {
+    const idArray = id.split('-');
+    return this.getNodeByIdRec(idArray);
+  }
+
+  getNodeByIdRec(id: string[]): RecipesNode{
     if (id.length === 1) {
-      return chapter.children.find(chptr => chptr.id === id[0]);
+      return this.recipes[0]; // chapter.children.find(chptr => chptr.id === id.join('-'));
     }
-    const nodeID = id.shift();
-    const childChapter = chapter.children.find(chptr => chptr.id === nodeID);
-    return this.getNodeByID(childChapter, id);
+    const parentChapter = this.getNodeByIdRec(id.slice(0, id.length - 1 ));
+    return parentChapter.children.find(chptr => chptr.id === id.join('-'));
+    // return this.getNodeByIdRec(childChapter, id);
 
     /*const path = id.split('-');
     let currentChapter = (this.recipes)[0];
