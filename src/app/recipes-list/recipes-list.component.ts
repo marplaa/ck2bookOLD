@@ -33,9 +33,7 @@ export class RecipesListComponent implements OnInit {
   }
 
   updateTreeView(): void{
-    data = this.dataSource._data;
-    this.dataSource._data = null;
-    this.dataSource._data = data;
+    this.dataSource = new ArrayDataSource(this.recipes.children);
   }
 
   addRecipe(chapter: RecipesNode): void {
