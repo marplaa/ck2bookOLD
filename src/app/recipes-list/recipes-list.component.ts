@@ -18,6 +18,7 @@ export class RecipesListComponent implements OnInit {
   recipe: Recipe;
   chapter: RecipesNode = {id: '', title: '', children: []};
   newChapterTitle = '';
+  newRecipeUrl: '';
 
   treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
   dataSource = new ArrayDataSource(this.recipes.children);
@@ -39,8 +40,8 @@ export class RecipesListComponent implements OnInit {
   }
 
   addRecipe(chapter: RecipesNode): void {
-    this.recipesService.getRecipe('https://www.chefkoch.de/rezepte/692211171805380/Blaetterteig-mit-Tomate-Zucchini-und-Feta.html')
-      .subscribe(recipe => {this.recipe = recipe; chapter.children.push(recipe); console.log(chapter); } );
+    this.recipesService.getRecipe(this.newRecipeUrl)
+      .subscribe(recipe => {this.recipe = recipe; chapter.children.push(recipe); console.log(recipe)} );
   }
 
   /*
@@ -49,6 +50,7 @@ export class RecipesListComponent implements OnInit {
   * chapter: parent chapter to add the new chapter to
   *
   * */
+
   addChapter(chapter: RecipesNode): void {
     let newId = 'x';
     do {
@@ -99,6 +101,13 @@ export class RecipesListComponent implements OnInit {
     this.chapter = chapter;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result === 's') {this.addChapter(chapter); }
+    });
+  }
+
+  openNewRecipeModal(content, chapter): void {
+    this.chapter = chapter;
+    this.modalService.open(content, {ariaLabelledBy: 'nr-title'}).result.then((result) => {
+      if (result === 's') {this.addRecipe(chapter); }
     });
   }
 
