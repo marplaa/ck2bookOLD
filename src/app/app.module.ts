@@ -15,6 +15,9 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { QuillModule } from 'ngx-quill';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import { IngredientsComponent } from './ingredients/ingredients.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -23,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     TestComponent,
     RecipesListComponent,
-    RecipeComponent
+    RecipeComponent,
+    IngredientsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     QuillModule.forRoot(),
     FormsModule,
     HttpClientModule,
+    MatTableModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,9 @@
 
   <img src="{{recipe.image}}" alt="..." class="img-thumbnail">
 
+  <app-ingredients [recipe]="recipe"></app-ingredients>
+
+
   <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
 </div>
 

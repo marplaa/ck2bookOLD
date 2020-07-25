@@ -14,16 +14,20 @@ import { Md5 } from 'ts-md5';
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: RecipesNode = Recipes;
+  recipes: RecipesNode;
   recipe: Recipe;
-  chapter: RecipesNode = {id: '', title: '', children: []};
+  private chapter: RecipesNode;
+
   newChapterTitle = '';
   newRecipeUrl: '';
 
-  treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
-  dataSource = new ArrayDataSource(this.recipes.children);
+  // treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
+  // dataSource = new ArrayDataSource(this.recipes.children);
 
-  constructor(private recipesService: RecipesService, private modalService: NgbModal) { }
+
+  constructor(private recipesService: RecipesService, private modalService: NgbModal) {
+    this.recipes = recipesService.recipes;
+  }
 
   ngOnInit(): void {
   }
@@ -35,14 +39,28 @@ export class RecipesListComponent implements OnInit {
     this.recipe = recipe;
   }
 
-  updateTreeView(): void{
-    this.dataSource = new ArrayDataSource(this.recipes.children);
+  addRecipe(chapter: RecipesNode): void {
+    this.recipesService.getRecipeFromUrl(this.newRecipeUrl)
+      .subscribe(recipe => {
+          recipe.id = this.generateId(chapter, recipe.title);
+          this.recipe = recipe;
+          chapter.children.push(recipe);
+          console.log(recipe);
+          // this.makeIngredientsArray(recipe);
+
+        }
+      );
   }
 
-  addRecipe(chapter: RecipesNode): void {
-    this.recipesService.getRecipe(this.newRecipeUrl)
-      .subscribe(recipe => {this.recipe = recipe; chapter.children.push(recipe); console.log(recipe)} );
+  generateId(parent: RecipesNode, text: string): string {
+    let id = 'x';
+    do {
+      id = parent.id + '-' + Md5.hashStr(text + id).toString().substr(0, 3);
+    } while (parent.children.find(node => node.id === id ));
+    return id;
   }
+
+
 
   /*
   * Adds a new chapter to the recipes tree.
@@ -52,10 +70,7 @@ export class RecipesListComponent implements OnInit {
   * */
 
   addChapter(chapter: RecipesNode): void {
-    let newId = 'x';
-    do {
-      newId = chapter.id + '-' + Md5.hashStr(this.newChapterTitle + newId).toString().substr(0, 3);
-    } while (chapter.children.find(node => node.id === newId ));
+    const newId = this.generateId(chapter, this.chapter.title);
 
     const newChapter = {
       id: newId,
@@ -67,35 +82,11 @@ export class RecipesListComponent implements OnInit {
   }
 
   showChapter(chapterID: string): void {
-    const chapter = this.getNodeById(chapterID);
+    const chapter = this.recipesService.getNodeById(chapterID);
     alert(chapter.title);
   }
 
-  getNodeById(id: string): RecipesNode {
-    const idArray = id.split('-');
-    return this.getNodeByIdRec(idArray);
-  }
 
-  getNodeByIdRec(id: string[]): RecipesNode{
-    if (id.length === 1) {
-      return this.recipes; // chapter.children.find(chptr => chptr.id === id.join('-'));
-    }
-    const parentChapter = this.getNodeByIdRec(id.slice(0, id.length - 1 ));
-    return parentChapter.children.find(chptr => chptr.id === id.join('-'));
-    // return this.getNodeByIdRec(childChapter, id);
-
-    /*const path = id.split('-');
-    let currentChapter = (this.recipes)[0];
-
-    let i: number;
-    for (i = 1; i < path.length - 1; i++) {
-      currentChapter = currentChapter.children.find(chapter => chapter.id === path[i]);
-    }
-    currentChapter = currentChapter.children.find(chapter => chapter.id === path[i]);
-
-    // alert(currentChapter["text"]);
-    return currentChapter;*/
-  }
 
   openNewChapterModal(content, chapter): void {
     this.chapter = chapter;
@@ -116,4 +107,12 @@ export class RecipesListComponent implements OnInit {
   }
 
 
+  /*private makeIngredientsArray(recipe: Recipe) {
+    let ingredients: [];
+    let ingredient;
+    for (ingredient in recipe.ingredients) {
+
+
+    }
+  }*/
 }

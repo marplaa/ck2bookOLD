@@ -2,13 +2,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-7">
 
       <div class="recipes-list-wrapper">
         <div class="tree">
-
-
-
 
         <ul>
           <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: recipes.children }"></ng-container>
@@ -20,17 +17,19 @@
             is recipe or chapter?
             -->
             <ng-container *ngIf="isRecipe(node); else isChapter">
-              <a (click)="selectRecipe(node)">{{node.title}}</a>
+<!--              <a (click)="selectRecipe(node)">{{node.title}}</a>-->
+              <a routerLink="/detail/{{node.id}}">{{node.title}}</a>
+
             </ng-container>
             <ng-template #isChapter>
               {{node.title}}
               <div class="float-right">
-                <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, getNodeById(node.id))">
+                <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, recipesService.getNodeById(node.id))">
                   <mat-icon>
                     note_add
                   </mat-icon>
                 </button>
-                <button mat-icon-button (click)="openNewChapterModal(newChapterModal, getNodeById(node.id))">
+                <button mat-icon-button (click)="openNewChapterModal(newChapterModal, recipesService.getNodeById(node.id))">
                   <mat-icon>
                     book
                   </mat-icon>
@@ -92,8 +91,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <app-recipe [recipe]="recipe"></app-recipe>
+    <div class="col-lg-5">
+<!--      <app-recipe [recipe]="recipe"></app-recipe>-->
     </div>
   </div>
 
