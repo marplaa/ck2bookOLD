@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { AppRoutingModule } from './app-routing.module';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -42,6 +43,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     MatTableModule,
     AppRoutingModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

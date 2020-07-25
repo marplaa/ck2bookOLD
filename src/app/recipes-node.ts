@@ -1,10 +1,6 @@
 import {newArray} from '@angular/compiler/src/util';
 import {skipUntil} from 'rxjs/operators';
 
-class Ingredient {
-  ingredient: string;
-  amount: string;
-}
 
 export interface RecipesNode {
   id: string;
@@ -16,10 +12,11 @@ export interface RecipesNode {
 export class Recipe implements RecipesNode{
   text?: string;
   url?: string;
-  ingredients: Ingredient[];
+  ingredients: string[][];
   images: string[];
   image: string;
   title: string;
+  recipeInfo: string[][];
   id: string;
 
   constructor(title: string) {
