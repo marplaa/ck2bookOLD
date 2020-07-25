@@ -16,13 +16,10 @@ export class RecipesListComponent implements OnInit {
 
   recipes: RecipesNode;
   recipe: Recipe;
-  private chapter: RecipesNode;
+  chapter: RecipesNode;
 
   newChapterTitle = '';
-  newRecipeUrl: '';
-
-  // treeControl = new NestedTreeControl<RecipesNode> (node => node.children);
-  // dataSource = new ArrayDataSource(this.recipes.children);
+  newRecipeUrl: 'https://www.chefkoch.de/rezepte/1247411229689036/Pizza-Baellchen.html';
 
 
   constructor(private recipesService: RecipesService, private modalService: NgbModal) {
@@ -39,6 +36,7 @@ export class RecipesListComponent implements OnInit {
     this.recipe = recipe;
   }
 
+  // TODO put in service
   addRecipe(chapter: RecipesNode): void {
     this.recipesService.getRecipeFromUrl(this.newRecipeUrl)
       .subscribe(recipe => {
@@ -51,7 +49,7 @@ export class RecipesListComponent implements OnInit {
         }
       );
   }
-
+  // TODO put in service
   generateId(parent: RecipesNode, text: string): string {
     let id = 'x';
     do {
@@ -68,7 +66,7 @@ export class RecipesListComponent implements OnInit {
   * chapter: parent chapter to add the new chapter to
   *
   * */
-
+ // TODO put in service
   addChapter(chapter: RecipesNode): void {
     const newId = this.generateId(chapter, this.chapter.title);
 

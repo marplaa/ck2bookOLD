@@ -1,12 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <input class="form-control" type="text" placeholder="Default input" [(ngModel)]="recipe.title" style="margin-bottom: 10px">
+
+      <img src="{{recipe.image}}" alt="..." class="img-thumbnail">
+      <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
+    </div>
+    <div class="col-lg-2">
+      <app-ingredients [recipe]="recipe"></app-ingredients>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="recipe">
-  <input class="form-control" type="text" placeholder="Default input" [(ngModel)]="recipe.title" style="margin-bottom: 10px">
-
-  <img src="{{recipe.image}}" alt="..." class="img-thumbnail">
-
-  <app-ingredients [recipe]="recipe"></app-ingredients>
 
 
-  <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
+
+
+
+
 </div>
 
 <button (click)="outputContent()">out</button>
