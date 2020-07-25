@@ -1,103 +1,134 @@
 import {Recipe, RecipesNode} from './recipes-node';
 
 const recipe: Recipe = {
-  url: 'https://www.chefkoch.de/rezepte/drucken/1247411229689036/Pizza-Baellchen.html',
-  title: 'Pizza-Bällchen',
+  url: 'https://www.chefkoch.de/rezepte/2455511386627445/Quinoa-Powersalat-mit-Tomaten-und-Avocado.html',
+  title: 'Quinoa Powersalat mit Tomaten und Avocado',
   ingredients: [
     [
       ''
     ],
     [
-      '300 g',
-      'Mehl'
+      '1 Tasse',
+      'Quinoa'
     ],
     [
-      '250 g',
-      'Quark'
+      'n. B.',
+      'Wasser'
     ],
     [
-      '1 Pck.',
-      'Backpulver'
+      '1',
+      'Salatgurke(n)'
     ],
     [
-      '8 EL',
-      'Milch'
+      '1',
+      'Avocado(s)'
     ],
     [
-      '6 EL',
-      'Öl'
+      '10',
+      'Cocktailtomaten'
+    ],
+    [
+      '1 ½ Bund',
+      'Petersilie'
     ],
     [
       '1 TL',
       'Salz'
     ],
     [
-      '1 EL',
-      'Zucker'
+      '1 Schuss',
+      'Olivenöl'
     ],
     [
-      '100 g',
-      'Röstzwiebeln'
+      '',
+      'Chili aus der Mühle'
     ],
     [
-      '200 g',
-      'Käse, gerieben'
-    ],
-    [
-      '100 g',
-      'Schinken, gewürfelt'
+      '',
+      'Pfeffer aus der Mühle'
     ]
   ],
   recipeInfo: [
     [
       'Arbeitszeit',
-      'ca. 20 Minuten'
+      'ca. 30 Minuten'
     ],
     [
       'Koch-/Backzeit',
-      'ca. 40 Minuten'
+      'ca. 20 Minuten'
     ],
     [
       'Gesamtzeit',
-      'ca. 1 Stunde'
+      'ca. 50 Minuten'
     ],
     [
       'Schwierigkeitsgrad',
-      'normal'
+      'simpel'
     ],
     [
       'Kalorien p. P.',
-      'ca. 3055'
+      'ca. 211'
     ]
   ],
-  text: 'Mehl, Quark, Backpulver, Milch, Öl, Salz und Zucker gut verkneten. Die übrigen Zutaten zum Teig geben. Noch mal durchkneten und kleine Bällchen formen. Auf ein Backblech mit Backpapier legen und für 30 - 40 Min. bei 180 Grad in den Ofen.</br>Für Feiern mache ich mindestens die doppelte Menge, kamen dort immer sehr gut an. Die Geschmackszutaten (Röstzwiebeln, Schinken, Käse) sind variabel, auf den Käse würde ich aber nicht verzichten!</br>Beim Backen muss man hin und wieder gucken, sie werden je nach Herd von unten auch sehr schnell dunkel, aber zu hell sollten sie auch nicht sein. Vorsicht, wenn sie noch warm sind, werden sie gerne stibitzt.',
+  text: 'Die Quinoa im Sieb waschen, im Topf mit Wasser bedecken, 20 min. kochen. In der Zwischenzeit Tomaten, Avocado und Gurke würfeln, die Petersilie hacken.</br>Die Quinoa sollte dann eine Konsistenz von weichem Reis haben, dann kann man sie unter Wasser abbrausen. Ich stelle das Sieb danach immer auf Küchenkrepp, damit die Quinoa etwas trockener und lockerer wird.</br>Mit den Gemüsewürfeln und der Petersilie vermischen, salzen und nach Geschmack noch etwas pfeffern. Etwas Olivenöl und Chili dazugeben. Aus der Mühle ist Chili ganz besonders frisch und bringt die Verdauung in Schwung. Die leichte Schärfe ist ein guter Gegensatz zur etwas laschen Gurke.</br>Alles schön vermengen und servieren.',
   images: [
-    'https://img.chefkoch-cdn.de/rezepte/1247411229689036/bilder/1234466/crop-360x240/pizza-baellchen.jpg'
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/964744/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/940533/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/828321/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/944681/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/926886/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/895765/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1030360/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1307167/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/844781/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/928111/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1028038/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/927346/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/986814/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1088396/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/904683/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1177555/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1297608/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/739271/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/691374/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/891140/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/891371/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1192574/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/911762/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/826023/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/788499/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1221776/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1156901/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1181465/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/926624/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1138463/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1313835/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+    'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1041025/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg'
   ],
-  image: 'https://img.chefkoch-cdn.de/rezepte/1247411229689036/bilder/1234466/crop-360x240/pizza-baellchen.jpg',
-  id: '00000-00002-fef'
+  image: 'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/964744/crop-360x240/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
+  id: '000-002-f75'
 };
 
 export const Recipes: RecipesNode =
 
 
   {
-    id: '00000',
+    id: '000',
     title: 'root',
     children: [
       {
-        id: '00000-00001',
+        id: '000-001',
         title: 'Kochen',
         children: [
           {
-            id: '00000-00001-00001',
+            id: '000-001-001',
             title: 'Suppen',
             children: [
 
             ]
           },
           {
-            id: '00000-00001-00002',
+            id: '000-001-002',
             title: 'Eintöpfe',
             children: [
 
@@ -106,7 +137,7 @@ export const Recipes: RecipesNode =
         ]
       },
       {
-        id: '00000-00002',
+        id: '000-002',
         title: 'Backen',
         children: [
           recipe
@@ -114,7 +145,7 @@ export const Recipes: RecipesNode =
         ]
       },
       {
-        id: '00000-00003',
+        id: '000-003',
         title: 'Trinken',
         children: [
 

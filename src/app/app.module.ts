@@ -19,6 +19,8 @@ import {MatTableModule} from '@angular/material/table';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatInputModule} from '@angular/material/input';
+import { ImageListComponent } from './image-list/image-list.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -28,7 +30,8 @@ import {MatInputModule} from '@angular/material/input';
     TestComponent,
     RecipesListComponent,
     RecipeComponent,
-    IngredientsComponent
+    IngredientsComponent,
+    ImageListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import {MatInputModule} from '@angular/material/input';
     MatTableModule,
     AppRoutingModule,
     MatInputModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
