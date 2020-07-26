@@ -6,6 +6,7 @@ export interface RecipesNode {
   id: string;
   title: string;
   image?: string;
+  images?: string[];
   children?: RecipesNode[];
 }
 
@@ -13,7 +14,6 @@ export class Recipe implements RecipesNode{
   text?: string;
   url?: string;
   ingredients: string[][];
-  images: string[];
   image: string;
   title: string;
   recipeInfo: string[][];

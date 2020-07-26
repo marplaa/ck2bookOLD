@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Recipe, RecipesNode} from './recipes-node';
 import {Recipes} from './skeleton';
 import {Md5} from 'ts-md5';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,12 @@ export class RecipesService {
   recipe: Recipe;
   chapter: RecipesNode = {id: '', title: '', children: []};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: StorageService) {
+    const loadedRecipes = JSON.parse(this.storage.get('book'));
+    if (loadedRecipes) {
+      this.recipes = loadedRecipes;
+    }
+  }
 
   getRecipeFromUrl(url: string): Observable<Recipe> {
     const reqUrl = 'http://localhost:4200/create/get_recipe_data_json_get/?url=' + url;
@@ -51,7 +57,7 @@ export class RecipesService {
     return currentChapter;*/
   }
 
-  // TODO put in service
+
   addRecipe(chapter: RecipesNode, url: string): void {
     this.getRecipeFromUrl(url)
       .subscribe(recipe => {
@@ -64,7 +70,7 @@ export class RecipesService {
         }
       );
   }
-  // TODO put in service
+
   generateId(parent: RecipesNode, text: string): string {
     let id = 'x';
     do {
@@ -81,7 +87,7 @@ export class RecipesService {
   * chapter: parent chapter to add the new chapter to
   *
   * */
-  // TODO put in service
+
   addChapter(chapter: RecipesNode, title: string): void {
     const newId = this.generateId(chapter, this.chapter.title);
 
@@ -91,5 +97,9 @@ export class RecipesService {
       children: []
     };
     chapter.children.push(newChapter);
+  }
+
+  save(): void {
+    this.storage.set('book', JSON.stringify(this.recipes));
   }
 }

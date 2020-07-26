@@ -23,6 +23,7 @@ import { ImageListComponent } from './image-list/image-list.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import { RecipePreviewComponent } from './recipe-preview/recipe-preview.component';
+import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
 
 
 
@@ -35,6 +36,7 @@ import { RecipePreviewComponent } from './recipe-preview/recipe-preview.componen
     IngredientsComponent,
     ImageListComponent,
     RecipePreviewComponent,
+    ChapterDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,17 +23,12 @@ export class RecipesListComponent implements OnInit {
   newRecipeUrl: 'https://www.chefkoch.de/rezepte/1247411229689036/Pizza-Baellchen.html';
 
 
-  constructor(private recipesService: RecipesService,
-              private modalService: NgbModal,
-              @Inject(LOCAL_STORAGE) private storage: StorageService) {
-    this.recipes = recipesService.recipes;
+  constructor(public recipesService: RecipesService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
-    const loadedRecipes = JSON.parse(this.storage.get('book'));
-    if (loadedRecipes) {
-      this.recipesService.recipes = loadedRecipes;
-    }
+    this.recipes = this.recipesService.recipes;
   }
 
 
@@ -52,17 +47,17 @@ export class RecipesListComponent implements OnInit {
 
 
 
-  openNewChapterModal(content, chapter): void {
-    this.chapter = chapter;
+  openNewChapterModal(content, chapter: string): void {
+    this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      if (result === 's') {this.recipesService.addChapter(chapter, this.newChapterTitle); }
+      if (result === 's') {this.recipesService.addChapter(this.chapter, this.newChapterTitle); }
     });
   }
 
-  openNewRecipeModal(content, chapter): void {
-    this.chapter = chapter;
+  openNewRecipeModal(content, chapter: string): void {
+    this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'nr-title'}).result.then((result) => {
-      if (result === 's') {this.recipesService.addRecipe(chapter, this.newRecipeUrl); }
+      if (result === 's') {this.recipesService.addRecipe(this.chapter, this.newRecipeUrl); }
     });
   }
 
@@ -70,9 +65,7 @@ export class RecipesListComponent implements OnInit {
     return !node.children;
   }
 
-  save(): void {
-    this.storage.set('book', JSON.stringify(this.recipes));
-  }
+
 
   /*private makeIngredientsArray(recipe: Recipe) {
     let ingredients: [];

@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-lg-12" style="padding: 10px 15px; height: 50px;">
 
-      <button class="btn btn-success float-right" (click)="save()">Speichern</button>
+      <button class="btn btn-success float-right" (click)="recipesService.save()">Speichern</button>
 
 
     </div>
@@ -35,17 +35,17 @@
             <ng-template #isChapter>
               {{node.title}}
               <div class="float-right">
-                <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, recipesService.getNodeById(node.id))">
+                <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, node.id)">
                   <mat-icon>
                     note_add
                   </mat-icon>
                 </button>
-                <button mat-icon-button (click)="openNewChapterModal(newChapterModal, recipesService.getNodeById(node.id))">
+                <button mat-icon-button (click)="openNewChapterModal(newChapterModal, node.id)">
                   <mat-icon>
                     book
                   </mat-icon>
                 </button>
-                <button mat-button (click)="showChapter(node.id)">test</button>
+
 
               </div>
 
