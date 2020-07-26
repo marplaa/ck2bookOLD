@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Recipe, RecipesNode} from '../recipes-node';
 import {Recipes} from '../skeleton';
 import {NestedTreeControl} from '@angular/cdk/tree';
@@ -6,6 +6,7 @@ import {ArrayDataSource} from '@angular/cdk/collections';
 import { RecipesService } from '../recipes.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Md5 } from 'ts-md5';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -22,11 +23,17 @@ export class RecipesListComponent implements OnInit {
   newRecipeUrl: 'https://www.chefkoch.de/rezepte/1247411229689036/Pizza-Baellchen.html';
 
 
-  constructor(private recipesService: RecipesService, private modalService: NgbModal) {
+  constructor(private recipesService: RecipesService,
+              private modalService: NgbModal,
+              @Inject(LOCAL_STORAGE) private storage: StorageService) {
     this.recipes = recipesService.recipes;
   }
 
   ngOnInit(): void {
+    const loadedRecipes = JSON.parse(this.storage.get('book'));
+    if (loadedRecipes) {
+      this.recipesService.recipes = loadedRecipes;
+    }
   }
 
 
@@ -63,6 +70,9 @@ export class RecipesListComponent implements OnInit {
     return !node.children;
   }
 
+  save(): void {
+    this.storage.set('book', JSON.stringify(this.recipes));
+  }
 
   /*private makeIngredientsArray(recipe: Recipe) {
     let ingredients: [];

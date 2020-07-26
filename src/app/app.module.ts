@@ -21,6 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {MatInputModule} from '@angular/material/input';
 import { ImageListComponent } from './image-list/image-list.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
+import { RecipePreviewComponent } from './recipe-preview/recipe-preview.component';
 
 
 
@@ -32,6 +34,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RecipeComponent,
     IngredientsComponent,
     ImageListComponent,
+    RecipePreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AppRoutingModule,
     MatInputModule,
     MatGridListModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

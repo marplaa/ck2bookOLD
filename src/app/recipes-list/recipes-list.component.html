@@ -2,7 +2,18 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-7">
+    <div class="col-lg-12" style="padding: 10px 15px; height: 50px;">
+
+      <button class="btn btn-success float-right" (click)="save()">Speichern</button>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h2>Mein Kochbuch</h2>
+    </div>
+    <div class="col-lg-8">
 
       <div class="recipes-list-wrapper">
         <div class="tree">
@@ -18,7 +29,7 @@
             -->
             <ng-container *ngIf="isRecipe(node); else isChapter">
 <!--              <a (click)="selectRecipe(node)">{{node.title}}</a>-->
-              <a routerLink="/detail/{{node.id}}">{{node.title}}</a>
+              <a routerLink="/detail/{{node.id}}" (mouseover)="recipe=recipesService.getRecipeById(node.id)">{{node.title}}</a>
 
             </ng-container>
             <ng-template #isChapter>
@@ -52,47 +63,11 @@
           </li>
         </ng-template>
 
-
-        <!--<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
-          &lt;!&ndash; This is the tree node template for leaf nodes &ndash;&gt;
-          <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
-            &lt;!&ndash; use a disabled button to provide padding for tree leaf &ndash;&gt;
-            <button mat-icon-button disabled></button>
-            <a href="#" (click)="selectRecipe(node)">{{node.title}}</a>
-            <button (click)="showChapter(node.id)">test</button>
-          </cdk-nested-tree-node>
-          &lt;!&ndash; This is the tree node template for expandable nodes &ndash;&gt;
-          <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
-            <button mat-icon-button [attr.aria-label]="'toggle ' + node.title" cdkTreeNodeToggle>
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            <a>{{node.title}}</a>
-            <div class="float-right">
-              <button mat-icon-button (click)="addRecipe(getNodeById(node.id))">
-                <mat-icon>
-                  note_add
-                </mat-icon>
-              </button>
-              <button (click)="openNewChapterModal(content, getNodeById(node.id))">
-                <mat-icon>
-                  book
-                </mat-icon>
-              </button>
-              <button (click)="showChapter(node.id)">test</button>
-
-            </div>
-            <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-              <ng-container cdkTreeNodeOutlet></ng-container>
-            </div>
-          </cdk-nested-tree-node>
-        </cdk-tree>-->
         </div>
       </div>
     </div>
-    <div class="col-lg-5">
-<!--      <app-recipe [recipe]="recipe"></app-recipe>-->
+    <div class="col-lg-4">
+      <app-recipe-preview *ngIf="recipe" [recipe]="recipe"></app-recipe-preview>
     </div>
   </div>
 
