@@ -1,4 +1,5 @@
 <div style="height: 250px; margin-bottom: 20px">
+
   <div class="container">
 
 
@@ -12,8 +13,8 @@
 
 
           <div class="row">
-            <div class="col-3" style="padding: 5px;" *ngFor="let i of [0,1,2,3,4,5,6,7]">
-              <img (click)="recipe.image = recipe.images[i]" src="{{recipe.images[i]}}" style="height: 100px;">
+            <div class="col-3" style="padding: 5px;" *ngFor="let img of displayedImages">
+              <img (click)="recipe.image = img; imageUrl.value='';" src="{{img}}" style="height: 100px; width: 100px; object-fit: cover;">
             </div>
 
           </div>
@@ -22,11 +23,14 @@
 
     </div>
 
+
     <div class="row">
-      <div class="col-5"></div>
+      <div class="col-5">
+
+      </div>
 
       <div class="col-2">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="selectPage(-1);">
           <mat-icon>
             chevron_left
           </mat-icon>
@@ -34,10 +38,12 @@
 
       </div>
       <div class="col-3">
-        <button mat-button style="margin-left: auto; margin-right: auto; display: block;">Eigenes Bild...</button>
+        <input class="form-control form-control-sm" type="text" #imageUrl placeholder="Eigenes Bild..." (input)="recipe.image = imageUrl.value; recipe.images.push(imageUrl.value)">
       </div>
+
+
       <div class="col-2">
-        <button mat-icon-button class="float-right">
+        <button mat-icon-button class="float-right" (click)="selectPage(1);">
           <mat-icon>
             chevron_right
           </mat-icon>

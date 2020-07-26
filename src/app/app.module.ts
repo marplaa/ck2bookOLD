@@ -31,7 +31,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RecipesListComponent,
     RecipeComponent,
     IngredientsComponent,
-    ImageListComponent
+    ImageListComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,9 +11,19 @@ import {Recipe} from '../recipes-node';
 export class ImageListComponent implements OnInit {
 
   @Input() recipe: Recipe;
+  page = 1;
+  displayedImages: string[];
   constructor() { }
 
   ngOnInit(): void {
+    this.displayedImages = this.recipe.images.slice(0, 8);
+  }
+
+  selectPage(direction: number): void {
+    const numPages = Math.ceil(this.recipe.images.length / 8);
+    this.page = (this.page + direction + numPages) % numPages;
+
+    this.displayedImages = this.recipe.images.slice(this.page * 8, this.page * 8 + 8);
   }
 
 }
