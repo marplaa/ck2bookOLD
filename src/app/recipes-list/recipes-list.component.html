@@ -33,7 +33,7 @@
 
             </ng-container>
             <ng-template #isChapter>
-              {{node.title}}
+              <a routerLink="/chapter/{{node.id}}">{{node.title}}</a>
               <div class="float-right">
                 <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, node.id)">
                   <mat-icon>

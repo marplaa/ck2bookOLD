@@ -5,6 +5,7 @@ import {Recipe, RecipesNode} from './recipes-node';
 import {Recipes} from './skeleton';
 import {Md5} from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { images } from './chapter-images';
 
 @Injectable({
   providedIn: 'root'
@@ -93,7 +94,10 @@ export class RecipesService {
 
     const newChapter = {
       id: newId,
+      images: images.cooking,
+      image: images.cooking[0],
       title,
+      text: 'Lorem ipsum',
       children: []
     };
     chapter.children.push(newChapter);

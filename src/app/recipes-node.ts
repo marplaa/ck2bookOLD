@@ -4,6 +4,7 @@ import {skipUntil} from 'rxjs/operators';
 
 export interface RecipesNode {
   id: string;
+  text: string;
   title: string;
   image?: string;
   images?: string[];
@@ -11,14 +12,13 @@ export interface RecipesNode {
 }
 
 export class Recipe implements RecipesNode{
-  text?: string;
   url?: string;
   ingredients: string[][];
   image: string;
   title: string;
   recipeInfo: string[][];
   id: string;
-
+  text: string;
   constructor(title: string) {
     this.title = title;
   }
