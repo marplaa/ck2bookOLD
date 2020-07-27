@@ -6,6 +6,7 @@ import {Recipes} from './skeleton';
 import {Md5} from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { images } from './chapter-images';
+import {twoColTemplate} from './latex-2-column-template';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class RecipesService {
 
   recipes = Recipes;
   recipe: Recipe;
-  chapter: RecipesNode = {id: '', title: '', children: []};
+  chapter: RecipesNode = {id: '', title: '', children: [], image: '', images: images.cooking, text: ''};
 
   constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: StorageService) {
     const loadedRecipes = JSON.parse(this.storage.get('book'));
@@ -105,5 +106,46 @@ export class RecipesService {
 
   save(): void {
     this.storage.set('book', JSON.stringify(this.recipes));
+  }
+
+  delete(): void {
+    this.storage.set('book', JSON.stringify(Recipes));
+    this.recipes = Recipes;
+  }
+
+
+
+  render(): string {
+    return  twoColTemplate.frame.replace('{{content}}', this.renderNode(this.recipes));
+  }
+
+  renderNode(node: RecipesNode): string {
+
+    let item;
+    let renderedItem;
+    let output = '';
+    for (item of node.children) {
+      console.log(item.title);
+
+      if (item.children) { // if chapter
+        renderedItem = twoColTemplate.chapter.replace('{{title}}', item.title);
+        renderedItem = renderedItem.replace('{{text}}', item.text);
+        if (item.children.length > 0) {
+          output += renderedItem.replace('{{children}}', this.renderNode(item));
+        } else {
+          output += renderedItem.replace('{{children}}', '');
+        }
+
+      } else {
+        // item is a recipe
+        renderedItem = twoColTemplate.recipe.replace('{{title}}', item.title);
+        renderedItem = renderedItem.replace('{{text}}', item.text);
+        renderedItem = renderedItem.replace('{{ingredients}}', item.title);
+        output += renderedItem;
+      }
+
+    }
+    return output;
+
   }
 }

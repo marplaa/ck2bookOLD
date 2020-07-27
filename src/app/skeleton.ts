@@ -1,4 +1,5 @@
 import {Recipe, RecipesNode} from './recipes-node';
+import {images} from './chapter-images';
 
 const recipe: Recipe = {
   url: 'https://www.chefkoch.de/rezepte/2455511386627445/Quinoa-Powersalat-mit-Tomaten-und-Avocado.html',
@@ -115,21 +116,33 @@ export const Recipes: RecipesNode =
   {
     id: '000',
     title: 'root',
+    images: images.cooking,
+    image: 'assets/img/chapter-images/cooking_1.jpg',
+    text: '',
     children: [
       {
         id: '000-001',
         title: 'Kochen',
+        images: images.cooking,
+        image: 'assets/img/chapter-images/cooking_1.jpg',
+        text: '',
         children: [
           {
             id: '000-001-001',
+            text: '',
             title: 'Suppen',
+            images: images.cooking,
+            image: 'assets/img/chapter-images/cooking_1.jpg',
             children: [
 
             ]
           },
           {
             id: '000-001-002',
+            text: '',
             title: 'Eintöpfe',
+            images: images.cooking,
+            image: 'assets/img/chapter-images/cooking_1.jpg',
             children: [
 
             ]
@@ -139,6 +152,9 @@ export const Recipes: RecipesNode =
       {
         id: '000-002',
         title: 'Backen',
+        text: '',
+        images: images.cooking,
+        image: 'assets/img/chapter-images/cooking_1.jpg',
         children: [
           recipe
 
@@ -147,6 +163,9 @@ export const Recipes: RecipesNode =
       {
         id: '000-003',
         title: 'Trinken',
+        text: '',
+        images: images.cooking,
+        image: 'assets/img/chapter-images/cooking_1.jpg',
         children: [
 
         ]

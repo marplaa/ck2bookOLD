@@ -15,6 +15,7 @@ export class Recipe implements RecipesNode{
   url?: string;
   ingredients: string[][];
   image: string;
+  images: string[];
   title: string;
   recipeInfo: string[][];
   id: string;

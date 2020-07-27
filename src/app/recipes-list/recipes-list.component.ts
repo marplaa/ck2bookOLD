@@ -18,6 +18,7 @@ export class RecipesListComponent implements OnInit {
   recipes: RecipesNode;
   recipe: Recipe;
   chapter: RecipesNode;
+  renderOutput: string;
 
   newChapterTitle = '';
   newRecipeUrl: 'https://www.chefkoch.de/rezepte/1247411229689036/Pizza-Baellchen.html';
@@ -65,7 +66,9 @@ export class RecipesListComponent implements OnInit {
     return !node.children;
   }
 
-
+  render(): void {
+    this.renderOutput = this.recipesService.render();
+  }
 
   /*private makeIngredientsArray(recipe: Recipe) {
     let ingredients: [];
