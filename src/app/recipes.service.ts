@@ -7,6 +7,7 @@ import {Md5} from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { images } from './chapter-images';
 import {twoColTemplate} from './latex-2-column-template';
+import { Renderer } from './renderer';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class RecipesService {
   }
 
   getRecipeFromUrl(url: string): Observable<Recipe> {
-    const reqUrl = 'http://localhost:4200/create/get_recipe_data_json_get/?url=' + url;
+    const reqUrl = 'http://localhost:4200/get/get_recipe_data_json_get?url=' + url;
     return this.http.get<Recipe>(reqUrl);
   }
 
@@ -71,6 +72,7 @@ export class RecipesService {
 
         }
       );
+    chapter.isBottomChapter = true;
   }
 
   generateId(parent: RecipesNode, text: string): string {
@@ -116,36 +118,7 @@ export class RecipesService {
 
 
   render(): string {
-    return  twoColTemplate.frame.replace('{{content}}', this.renderNode(this.recipes));
-  }
-
-  renderNode(node: RecipesNode): string {
-
-    let item;
-    let renderedItem;
-    let output = '';
-    for (item of node.children) {
-      console.log(item.title);
-
-      if (item.children) { // if chapter
-        renderedItem = twoColTemplate.chapter.replace('{{title}}', item.title);
-        renderedItem = renderedItem.replace('{{text}}', item.text);
-        if (item.children.length > 0) {
-          output += renderedItem.replace('{{children}}', this.renderNode(item));
-        } else {
-          output += renderedItem.replace('{{children}}', '');
-        }
-
-      } else {
-        // item is a recipe
-        renderedItem = twoColTemplate.recipe.replace('{{title}}', item.title);
-        renderedItem = renderedItem.replace('{{text}}', item.text);
-        renderedItem = renderedItem.replace('{{ingredients}}', item.title);
-        output += renderedItem;
-      }
-
-    }
-    return output;
-
+    const renderer = new Renderer();
+    return  twoColTemplate.frame.replace('{{content}}', renderer.renderNode(this.recipes));
   }
 }

@@ -9,6 +9,7 @@ export interface RecipesNode {
   image?: string;
   images?: string[];
   children?: RecipesNode[];
+  isBottomChapter?: boolean;
 }
 
 export class Recipe implements RecipesNode{
