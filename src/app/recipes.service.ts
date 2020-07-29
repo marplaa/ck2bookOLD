@@ -11,6 +11,7 @@ import {RenderedBook, Renderer} from './renderer';
 import {catchError} from 'rxjs/operators';
 
 interface CompilationResponse{
+  token: string;
   url: string;
 }
 
@@ -127,7 +128,7 @@ export class RecipesService {
     const renderer = new Renderer();
     const renderedBook = renderer.render(this.recipes);
     this.http.post<CompilationResponse>(url , {content: renderedBook.content, images: renderedBook.images})
-      .subscribe(data => console.log(data.url));
+      .subscribe(data => console.log(data.token));
   }
 
   render(): RenderedBook {

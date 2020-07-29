@@ -3,6 +3,7 @@ import {RecipesNode} from './recipes-node';
 import {Md5} from 'ts-md5';
 
 export interface RenderedBook {
+  id: string;
   content: string;
   images: string[];
 }
@@ -15,9 +16,11 @@ export class Renderer {
   }
 
   render(node: RecipesNode): RenderedBook {
+
     const content = twoColTemplate.frame.replace('{{content}}', this.renderNode(node));
+    const id = '' + Md5.hashStr(content);
     const images = this.imageList;
-    return {content, images};
+    return {id, content, images};
   }
 
   renderNode(node: RecipesNode): string {
