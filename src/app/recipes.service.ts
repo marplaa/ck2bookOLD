@@ -1,13 +1,19 @@
 import {Inject, Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {Recipe, RecipesNode} from './recipes-node';
 import {Recipes} from './skeleton';
 import {Md5} from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { images } from './chapter-images';
 import {twoColTemplate} from './latex-2-column-template';
-import { Renderer } from './renderer';
+import {RenderedBook, Renderer} from './renderer';
+import {catchError} from 'rxjs/operators';
+
+interface CompilationResponse{
+  url: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +107,7 @@ export class RecipesService {
       image: images.cooking[0],
       title,
       text: 'Lorem ipsum',
+      isBottomChapter: false,
       children: []
     };
     chapter.children.push(newChapter);
@@ -115,10 +122,18 @@ export class RecipesService {
     this.recipes = Recipes;
   }
 
-
-
-  render(): string {
+  requestCompilation(): void {
+    const url = 'http://localhost:4200/compile/toPdf';
     const renderer = new Renderer();
-    return  twoColTemplate.frame.replace('{{content}}', renderer.renderNode(this.recipes));
+    const renderedBook = renderer.render(this.recipes);
+    this.http.post<CompilationResponse>(url , {content: renderedBook.content, images: renderedBook.images})
+      .subscribe(data => console.log(data.url));
   }
+
+  render(): RenderedBook {
+    const renderer = new Renderer();
+    return renderer.render(this.recipes);
+  }
+
+
 }

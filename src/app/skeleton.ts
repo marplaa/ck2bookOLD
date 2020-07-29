@@ -117,22 +117,25 @@ export const Recipes: RecipesNode =
     id: '000',
     title: 'root',
     images: images.cooking,
-    image: 'assets/img/chapter-images/cooking_1.jpg',
+    image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
     text: '',
+    isBottomChapter: false,
     children: [
       {
         id: '000-001',
         title: 'Kochen',
         images: images.cooking,
-        image: 'assets/img/chapter-images/cooking_1.jpg',
+        image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
         text: '',
+        isBottomChapter: false,
         children: [
           {
             id: '000-001-001',
             text: '',
             title: 'Suppen',
             images: images.cooking,
-            image: 'assets/img/chapter-images/cooking_1.jpg',
+            image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
+            isBottomChapter: false,
             children: [
 
             ]
@@ -142,7 +145,8 @@ export const Recipes: RecipesNode =
             text: '',
             title: 'Eintöpfe',
             images: images.cooking,
-            image: 'assets/img/chapter-images/cooking_1.jpg',
+            image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
+            isBottomChapter: false,
             children: [
 
             ]
@@ -154,7 +158,8 @@ export const Recipes: RecipesNode =
         title: 'Backen',
         text: '',
         images: images.cooking,
-        image: 'assets/img/chapter-images/cooking_1.jpg',
+        image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
+        isBottomChapter: true,
         children: [
           recipe
 
@@ -165,7 +170,8 @@ export const Recipes: RecipesNode =
         title: 'Trinken',
         text: '',
         images: images.cooking,
-        image: 'assets/img/chapter-images/cooking_1.jpg',
+        image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
+        isBottomChapter: false,
         children: [
 
         ]

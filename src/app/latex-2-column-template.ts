@@ -8,6 +8,7 @@ export const twoColTemplate = {
     '\\usepackage{wrapfig}\n' +
     '\\usepackage{wallpaper}\n' +
     '\\usepackage[breakable]{tcolorbox}\n' +
+    '\\graphicspath{{images/}} %Setting the graphicspath' +
     '\n' +
     '\n' +
     '\\newtcolorbox{mytextbox}[1][]{%\n' +
@@ -29,7 +30,7 @@ export const twoColTemplate = {
   recipe:
    // 'RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE' +
     '\\begin{mytextbox}\n' +
-    '  \\ThisCenterWallPaper{1.2}{cooking_4}\n' +
+    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
     '  \\section{{{title}}}\n' +
     '\n' +
     '\n' +
@@ -56,7 +57,7 @@ export const twoColTemplate = {
 
 
     '  \\chapter{{{title}}}\n' +
-    '  \\ThisCenterWallPaper{1.2}{{{image}}}\n' +
+    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
     '\\begin{mytextbox}\n' +
     '{{text}}' +
     '\\end{mytextbox}\n' +
@@ -72,7 +73,7 @@ export const twoColTemplate = {
     '\\newpage\n' +
    // 'CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER' +
 
-    '  \\ThisCenterWallPaper{1.2}{{{image}}}\n' +
+    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
     '  \\chapter{{{title}}}\n' +
     '\\begin{mytextbox}\n' +
     '{{text}}' +

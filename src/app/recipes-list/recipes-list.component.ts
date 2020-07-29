@@ -66,8 +66,14 @@ export class RecipesListComponent implements OnInit {
     return !node.children;
   }
 
+  renderHere(): void {
+    // this.renderOutput = this.recipesService.render();
+  }
+
   render(): void {
-    this.renderOutput = this.recipesService.render();
+    // const renderedBook = this.recipesService.render();
+    this.recipesService.requestCompilation();
+
   }
 
   /*private makeIngredientsArray(recipe: Recipe) {
