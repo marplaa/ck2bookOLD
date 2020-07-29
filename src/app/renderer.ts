@@ -5,12 +5,12 @@ import {Md5} from 'ts-md5';
 export interface RenderedBook {
   id: string;
   content: string;
-  images: string[];
+  images: string[][];
 }
 
 export class Renderer {
 
-  imageList: string[] = [];
+  imageList: string[][] = [];
 
   constructor() {
   }
@@ -40,8 +40,8 @@ export class Renderer {
         renderedItem = renderedItem.replace('{{text}}', item.text);
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image));
 
-        if (this.imageList.indexOf(item.image) === -1) {
-          this.imageList.push(item.image);
+        if (this.imageList.filter(img => img[0] === item.image).length === 0) {
+          this.imageList.push([item.image, twoColTemplate.chapterImageRes]);
         }
         if (item.children.length > 0) {
           output += renderedItem.replace('{{children}}', this.renderNode(item));
@@ -56,8 +56,8 @@ export class Renderer {
         renderedItem = renderedItem.replace('{{ingredients}}', item.title);
         renderedItem = renderedItem.replace('{{image}}', Md5.hashStr(item.image));
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image));
-        if (this.imageList.indexOf(item.image) === -1) {
-          this.imageList.push(item.image);
+        if (this.imageList.filter(img => img[0] === item.image && img[1] === twoColTemplate.recipeBgImageRes).length === 0) {
+          this.imageList.push([item.image, twoColTemplate.recipeBgImageRes]);
         }
         output += renderedItem;
       }

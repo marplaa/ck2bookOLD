@@ -1,4 +1,8 @@
+
 export const twoColTemplate = {
+  chapterImageRes: '2480x3508',
+  recipeImageRes: '800x600',
+  recipeBgImageRes: '2480x3508',
   frame: '\\documentclass[12pt]{book}\n' +
     '\\usepackage[utf8]{inputenc}\n' +
     '\\usepackage[top=1.5cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}\n' +
@@ -73,8 +77,9 @@ export const twoColTemplate = {
     '\\newpage\n' +
    // 'CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER' +
 
-    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
+
     '  \\chapter{{{title}}}\n' +
+    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
     '\\begin{mytextbox}\n' +
     '{{text}}' +
     '\\end{mytextbox}\n' +
