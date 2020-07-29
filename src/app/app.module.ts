@@ -24,8 +24,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import { RecipePreviewComponent } from './recipe-preview/recipe-preview.component';
 import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-
+const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ChapterDetailComponent } from './chapter-detail/chapter-detail.componen
     MatInputModule,
     MatGridListModule,
     MatDividerModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

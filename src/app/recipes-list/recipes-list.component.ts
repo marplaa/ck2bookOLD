@@ -7,12 +7,15 @@ import { RecipesService } from '../recipes.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Md5 } from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Socket } from 'ngx-socket-io';
+import { CompilationService} from '../compilation.service';
 
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.css']
 })
+
 export class RecipesListComponent implements OnInit {
 
   recipes: RecipesNode;
@@ -25,6 +28,7 @@ export class RecipesListComponent implements OnInit {
 
 
   constructor(public recipesService: RecipesService,
+              public compilationService: CompilationService,
               private modalService: NgbModal) {
   }
 
