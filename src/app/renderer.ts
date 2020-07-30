@@ -5,12 +5,22 @@ import {Md5} from 'ts-md5';
 export interface RenderedBook {
   id: string;
   content: string;
-  images: string[][];
+  images: Image[];
+}
+
+interface Size {
+  size: string;
+  filter: {};
+}
+
+interface Image {
+  url: string;
+  sizes: Size[];
 }
 
 export class Renderer {
 
-  imageList: string[][] = [];
+  imageList: Image[] = [];
 
   constructor() {
   }
@@ -42,7 +52,8 @@ export class Renderer {
 
         // check if image is already in list
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
-          this.imageList.push([item.image, [twoColTemplate.chapterImageRes]]);
+          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.chapterImageRes,  filter: {}}], };
+          this.imageList.push(img);
         }
 
         if (item.children.length > 0) {
@@ -60,7 +71,9 @@ export class Renderer {
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.recipeBgImageRes);
 
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
-          this.imageList.push([item.image, [twoColTemplate.recipeImageRes, twoColTemplate.recipeBgImageRes]]);
+          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.recipeImageRes,  filter: {}},
+              {size: twoColTemplate.recipeBgImageRes,  filter: {blur: 20}}]};
+          this.imageList.push(img);
         }
         output += renderedItem;
       }
