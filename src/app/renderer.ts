@@ -48,7 +48,7 @@ export class Renderer {
           renderedItem = twoColTemplate.chapter_w_subchapters.replace('{{title}}', item.title);
         }
         renderedItem = renderedItem.replace('{{text}}', item.text);
-        renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image));
+        renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.chapterImageRes);
 
         // check if image is already in list
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
@@ -65,14 +65,14 @@ export class Renderer {
       } else {
         // item is a recipe
         renderedItem = twoColTemplate.recipe.replace('{{title}}', item.title);
-        renderedItem = renderedItem.replace('{{text}}', item.text);
+        renderedItem = renderedItem.replace('{{text}}', this.htmlToTex(item.text));
         renderedItem = renderedItem.replace('{{ingredients}}', item.title);
         renderedItem = renderedItem.replace('{{image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.recipeImageRes);
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.recipeBgImageRes);
 
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
           const img: Image = {url: item.image, sizes: [{size: twoColTemplate.recipeImageRes,  filter: {}},
-              {size: twoColTemplate.recipeBgImageRes,  filter: {blur: 20}}]};
+              {size: twoColTemplate.recipeBgImageRes,  filter: {blur: 15}}]};
           this.imageList.push(img);
         }
         output += renderedItem;
@@ -81,6 +81,44 @@ export class Renderer {
     }
     return output;
 
+  }
+
+  htmlToTex(text: string): string {
+    // replace <strong>
+    let regex = /<\s*strong[^>]*>(.*?)<\s*\/\s*strong>/g;
+    let tags = text.match(regex);
+    console.log(tags[1]);
+    for (let tag of tags) {
+      console.log(tag);
+      const newTag = '\\textbf{' + tag.replace('<strong>', '').replace('</strong>', '') + '}';
+      console.log(newTag);
+      text = text.replace(tag, newTag);
+    }
+
+    // replace <p>
+    regex = /<\s*p[^>]*>(.*?)<\s*\/\s*p>/g;
+    tags = text.match(regex);
+    console.log(tags[1]);
+    for (let tag of tags) {
+      console.log(tag);
+      const newTag = tag.replace('<p>', '').replace('</p>', '') + '\\newline\n';
+      console.log(newTag);
+      text = text.replace(tag, newTag);
+    }
+
+    // replace <u>
+    regex = /<\s*u[^>]*>(.*?)<\s*\/\s*u>/g;
+    tags = text.match(regex);
+    console.log(tags[1]);
+    for (let tag of tags) {
+      console.log(tag);
+      const newTag = '\\uline{' + tag.replace('<u>', '').replace('</u>', '') + '}';
+      console.log(newTag);
+      text = text.replace(tag, newTag);
+    }
+
+    // console.log(newTag);
+    return text;
   }
 
 }

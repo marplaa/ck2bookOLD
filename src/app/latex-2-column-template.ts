@@ -3,12 +3,13 @@ export const twoColTemplate = {
   chapterImageRes: '2480x3508',
   recipeImageRes: '800x600',
   recipeBgImageRes: '2480x3508',
-  frame: '\\documentclass[12pt]{book}\n' +
+  frame: '\\documentclass[12pt, a4paper]{book}\n' +
     '\\usepackage[utf8]{inputenc}\n' +
     '\\usepackage[top=1.5cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}\n' +
     '\\usepackage{multicol}\n' +
     '\\setlength{\\columnsep}{1cm}\n' +
     '\\usepackage{graphicx}\n' +
+    '\\usepackage{ulem}\n' +
     '\\usepackage{wrapfig}\n' +
     '\\usepackage{wallpaper}\n' +
     '\\usepackage[breakable]{tcolorbox}\n' +
@@ -25,6 +26,8 @@ export const twoColTemplate = {
     '\n' +
     '\\begin{document}\n' +
 
+    '\\tableofcontents{}' +
+
     '\n' +
     '\t\t{{content}}\n' +
     '\n' +
@@ -34,14 +37,16 @@ export const twoColTemplate = {
   recipe:
    // 'RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE RECIPE' +
     '\\begin{mytextbox}\n' +
-    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
+
     '  \\section{{{title}}}\n' +
+
     '\n' +
     '\n' +
     '\n' +
     '  \\begin{center}\n' +
     '    \\includegraphics[width=7cm]{{{image}}}\n' +
     '  \\end{center}\n' +
+
     '\n' +
     '\n' +
     '  \\begin{center}\n' +
@@ -50,7 +55,8 @@ export const twoColTemplate = {
     '\n' +
     '  {{text}}\n' +
     '\n' +
-    '\\end{mytextbox}',
+    '\\end{mytextbox}' +
+  '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n',
 
   chapter:
 
@@ -61,7 +67,7 @@ export const twoColTemplate = {
 
 
     '  \\chapter{{{title}}}\n' +
-    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
+    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
     '\\begin{mytextbox}\n' +
     '{{text}}' +
     '\\end{mytextbox}\n' +
@@ -79,7 +85,7 @@ export const twoColTemplate = {
 
 
     '  \\chapter{{{title}}}\n' +
-    '  \\ThisCenterWallPaper{1.2}{{{bg-image}}}\n' +
+    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
     '\\begin{mytextbox}\n' +
     '{{text}}' +
     '\\end{mytextbox}\n' +
