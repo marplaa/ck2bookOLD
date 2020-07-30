@@ -40,9 +40,11 @@ export class Renderer {
         renderedItem = renderedItem.replace('{{text}}', item.text);
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image));
 
-        if (this.imageList.filter(img => img[0] === item.image).length === 0) {
+        // check if image is already in list
+        if (this.imageList.filter(img => img[0] === item.image && img[1] === twoColTemplate.chapterImageRes).length === 0) {
           this.imageList.push([item.image, twoColTemplate.chapterImageRes]);
         }
+
         if (item.children.length > 0) {
           output += renderedItem.replace('{{children}}', this.renderNode(item));
         } else {
@@ -56,8 +58,12 @@ export class Renderer {
         renderedItem = renderedItem.replace('{{ingredients}}', item.title);
         renderedItem = renderedItem.replace('{{image}}', Md5.hashStr(item.image));
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image));
+
         if (this.imageList.filter(img => img[0] === item.image && img[1] === twoColTemplate.recipeBgImageRes).length === 0) {
           this.imageList.push([item.image, twoColTemplate.recipeBgImageRes]);
+        }
+        if (this.imageList.filter(img => img[0] === item.image && img[1] === twoColTemplate.recipeImageRes).length === 0) {
+          this.imageList.push([item.image, twoColTemplate.recipeImageRes]);
         }
         output += renderedItem;
       }
