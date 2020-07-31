@@ -1,70 +1,109 @@
-
-
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12" style="padding: 10px 15px; height: 50px;">
 
-      <button class="btn btn-success float-right" (click)="recipesService.save()">Speichern</button>
-      <button class="btn btn-success float-right" (click)="recipesService.delete()">Löschen</button>
-      <button class="btn btn-success float-right" (click)="renderHere()">Rendern</button>
-      <button class="btn btn-success float-right" (click)="render()">Rendern2Tex</button>
+  <div class="row">
+    <div class="col-12">
+      <div id="navbar">
+        <button mat-raised-button [matMenuTriggerFor]="menu">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="recipesService.save()">
+            <mat-icon>save</mat-icon>
+            Speichern
+          </button>
+          <button mat-menu-item (click)="recipesService.delete()">
+            <mat-icon>delete</mat-icon>
+            Löschen
+          </button>
+
+        </mat-menu>
+        <button mat-raised-button class="float-right" (click)="render()">
+          <mat-icon>print</mat-icon>
+          Rendern2Tex
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-12" style="padding: 10px 15px; height: 50px;">
 
 
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <h2>Mein Kochbuch</h2>
-    </div>
+    
     <div class="col-lg-8">
 
       <div class="recipes-list-wrapper">
         <div class="tree">
-
-        <ul>
-          <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: recipes.children }"></ng-container>
-        </ul>
-
-        <ng-template #recursiveListTmpl let-list="recipes">
-          <li *ngFor="let node of list">
-            <!--
-            is recipe or chapter?
-            -->
-            <ng-container *ngIf="isRecipe(node); else isChapter">
-<!--              <a (click)="selectRecipe(node)">{{node.title}}</a>-->
-              <a routerLink="/detail/{{node.id}}" (mouseover)="recipe=recipesService.getRecipeById(node.id)">{{node.title}}</a>
-
-            </ng-container>
-            <ng-template #isChapter>
-              <a routerLink="/chapter/{{node.id}}">{{node.title}}</a>
-              <div class="float-right">
-                <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, node.id)">
-                  <mat-icon>
-                    note_add
-                  </mat-icon>
-                </button>
-                <button mat-icon-button (click)="openNewChapterModal(newChapterModal, node.id)">
-                  <mat-icon>
-                    book
-                  </mat-icon>
-                </button>
-
-
-              </div>
-
-
-
-              <ul *ngIf="hasChild(node)">
-                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: node.children }"></ng-container>
+          <ul>
+            <li>Mein Kochbuch
+              <button class="float-right" mat-icon-button (click)="openNewChapterModal(newChapterModal, '000')">
+                <mat-icon>
+                  book
+                </mat-icon>
+              </button>
+            </li>
+            <li>
+              <ul>
+                <ng-container
+                  *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: recipes.children }"></ng-container>
               </ul>
+            </li>
+
+          </ul>
 
 
+          <ng-template #recursiveListTmpl let-list="recipes">
+            <li *ngFor="let node of list">
+              <!--
+              is recipe or chapter?
+              -->
+              <ng-container *ngIf="isRecipe(node); else isChapter">
+                <!--              <a (click)="selectRecipe(node)">{{node.title}}</a>-->
+                <a routerLink="/detail/{{node.id}}"
+                   (mouseover)="recipe=recipesService.getRecipeById(node.id)">{{node.title}}</a>
 
-            </ng-template>
+              </ng-container>
+              <ng-template #isChapter>
+                <a routerLink="/chapter/{{node.id}}">{{node.title}}</a>
+                <div class="float-right">
 
 
-          </li>
-        </ng-template>
+                  <ng-container *ngIf="isBottomChapter(node) || node.children.length === 0">
+                    <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, node.id)">
+                      <mat-icon>
+                        note_add
+                      </mat-icon>
+                    </button>
+                  </ng-container>
+
+                  <ng-container *ngIf="!isBottomChapter(node)">
+                    <button mat-icon-button (click)="openNewChapterModal(newChapterModal, node.id)">
+                      <mat-icon>
+                        book
+                      </mat-icon>
+                    </button>
+
+                  </ng-container>
+
+
+                </div>
+
+
+                <ul *ngIf="hasChild(node)">
+                  <ng-container
+                    *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: node.children }"></ng-container>
+                </ul>
+
+
+              </ng-template>
+
+
+            </li>
+          </ng-template>
 
         </div>
       </div>
@@ -82,14 +121,6 @@
     </div>
   </div>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-  <script type="text/javascript" charset="utf-8">
-    var socket = io();
-    socket.on('connect', function() {
-      socket.emit('my event', {data: 'I\'m connected!'});
-    });
-  </script>
-
 </div>
 
 
@@ -105,7 +136,8 @@
       <div class="form-group">
         <label for="newChapterTitle">Neues Kapitel</label>
         <div class="input-group">
-          <input class="form-control" id="newChapterTitle" type="text" placeholder="Titel des neuen Kapitels" name="newChapterName" [(ngModel)]="newChapterTitle" style="margin-bottom: 10px">
+          <input class="form-control" id="newChapterTitle" type="text" placeholder="Titel des neuen Kapitels"
+                 name="newChapterName" [(ngModel)]="newChapterTitle" style="margin-bottom: 10px">
         </div>
       </div>
     </form>
@@ -127,7 +159,8 @@
       <div class="form-group">
         <label for="newChapterTitle">Neues Rezept</label>
         <div class="input-group">
-          <input class="form-control" id="newRecipeUrl" type="text" placeholder="https://www.example.com" name="newRecipeUrl" [(ngModel)]="newRecipeUrl" style="margin-bottom: 10px">
+          <input class="form-control" id="newRecipeUrl" type="text" placeholder="https://www.example.com"
+                 name="newRecipeUrl" [(ngModel)]="newRecipeUrl" style="margin-bottom: 10px">
         </div>
       </div>
     </form>

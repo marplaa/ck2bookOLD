@@ -26,6 +26,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { RecipePreviewComponent } from './recipe-preview/recipe-preview.component';
 import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
 import { DialogComponent } from './dialog/dialog.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -57,7 +58,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatInputModule,
     MatGridListModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   entryComponents: [DialogComponent],
   providers: [],

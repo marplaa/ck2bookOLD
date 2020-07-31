@@ -66,6 +66,10 @@ export class RecipesListComponent implements OnInit {
     return !node.children;
   }
 
+  isBottomChapter(node: RecipesNode): boolean {
+    return node.isBottomChapter;
+  }
+
   renderHere(): void {
     // this.renderOutput = this.recipesService.render();
   }
