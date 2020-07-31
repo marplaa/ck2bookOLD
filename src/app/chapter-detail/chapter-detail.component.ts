@@ -34,9 +34,13 @@ export class ChapterDetailComponent implements OnInit {
 
 
   openDeleteDialog(chapter: RecipesNode): void {
-    this.dialog.open(DialogComponent, {
-      data: {
-        node: chapter
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: chapter
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete();
       }
     });
   }
