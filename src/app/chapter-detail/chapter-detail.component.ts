@@ -4,6 +4,8 @@ import {RecipesService} from '../recipes.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {DialogComponent} from '../dialog/dialog.component';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class ChapterDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private location: Location,
               private router: Router,
+              private dialog: MatDialog
               ) { }
 
   ngOnInit(): void {
@@ -30,6 +33,17 @@ export class ChapterDetailComponent implements OnInit {
   }
 
 
+  openDeleteDialog(chapter: RecipesNode): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: chapter
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete();
+      }
+    });
+  }
 
   delete(): void {
     this.recipesService.deleteNode(this.chapter.id);
