@@ -91,9 +91,9 @@ export class Renderer {
     let tags = text.match(regex);
     if (tags) {
       for (let tag of tags) {
-        console.log(tag);
+
         const newTag = '\\textbf{' + tag.replace('<strong>', '').replace('</strong>', '') + '}';
-        console.log(newTag);
+
         text = text.replace(tag, newTag);
       }
     }
@@ -103,9 +103,9 @@ export class Renderer {
     tags = text.match(regex);
     if (tags) {
       for (let tag of tags) {
-        console.log(tag);
+
         const newTag = tag.replace('<p>', '').replace('</p>', '') + '\\newline\n';
-        console.log(newTag);
+
         text = text.replace(tag, newTag);
       }
     }
@@ -115,29 +115,33 @@ export class Renderer {
     tags = text.match(regex);
     if (tags) {
       for (let tag of tags) {
-        console.log(tag);
+
         const newTag = '\\uline{' + tag.replace('<u>', '').replace('</u>', '') + '}';
-        console.log(newTag);
+
         text = text.replace(tag, newTag);
       }
     }
 
-    // replace <u>
-    text = text.replace('</b>', ' \\\\\n');
 
+    text = text.replace(/<\/br>/g, ' \\\\\n');
 
     // console.log(newTag);
     return text;
   }
 
-  renderTable(ingredients: string[][]): string {
-    let table = "\\begin{tabular}{r l}\n";
+  renderTable(ingredients: string[]): string {
+    console.log(ingredients);
+    let table = '\\begin{tabulary}{7.8cm}{R|L}\n';
     for (let ingredient of ingredients) {
       if ( ingredient.length === 2) {
         table += ingredient[0] + ' & ' + ingredient[1] + ' \\\\\n';
+      } else if (ingredient.length === 1) {
+        if (ingredient[0] !== '') {
+          table += '\\hline\n\\textbf{' + ingredient[0] +  '} \\\\\n';
+        }
       }
     }
-    table += '\\end{tabular}\n';
+    table += '\\end{tabulary}\n';
     return table;
   }
 
