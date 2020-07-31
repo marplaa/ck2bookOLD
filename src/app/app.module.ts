@@ -22,8 +22,10 @@ import {MatInputModule} from '@angular/material/input';
 import { ImageListComponent } from './image-list/image-list.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatDialogModule} from '@angular/material/dialog';
 import { RecipePreviewComponent } from './recipe-preview/recipe-preview.component';
 import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -37,6 +39,7 @@ import { ChapterDetailComponent } from './chapter-detail/chapter-detail.componen
     ImageListComponent,
     RecipePreviewComponent,
     ChapterDetailComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,9 @@ import { ChapterDetailComponent } from './chapter-detail/chapter-detail.componen
     MatInputModule,
     MatGridListModule,
     MatDividerModule,
+    MatDialogModule
   ],
+  entryComponents: [DialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
