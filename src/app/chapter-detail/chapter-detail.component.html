@@ -6,6 +6,7 @@
       <a routerLink="/"><button class="btn btn-success float-right" >Zurück</button></a>
 
 
+
     </div>
   </div>
 
@@ -19,9 +20,19 @@
 
       <app-image-list [node]="chapter"></app-image-list>
 
-      <quill-editor [modules]="modules" [(ngModel)]="chapter.text"></quill-editor>
+      <div style="max-height: 500px">
+        <quill-editor [modules]="modules" [(ngModel)]="chapter.text"></quill-editor>
+      </div>
     </div>
 
+  </div>
+  <div class="row">
+    <div class="col-10">
+
+    </div>
+    <div class="col-2">
+      <button class="btn btn-danger float-right" (click)="delete()">Kapitel löschen</button>
+    </div>
   </div>
 </div>
 

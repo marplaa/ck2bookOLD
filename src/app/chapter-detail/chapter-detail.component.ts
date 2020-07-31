@@ -3,6 +3,8 @@ import {RecipesNode} from '../recipes-node';
 import {RecipesService} from '../recipes.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-chapter-detail',
@@ -17,10 +19,21 @@ export class ChapterDetailComponent implements OnInit {
   model: string;
   chapter: RecipesNode;
 
-  constructor(private recipesService: RecipesService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private recipesService: RecipesService,
+              private route: ActivatedRoute,
+              private location: Location,
+              private router: Router,
+              ) { }
 
   ngOnInit(): void {
     this.chapter = this.recipesService.getNodeById(this.route.snapshot.paramMap.get('id'));
+  }
+
+
+
+  delete(): void {
+    this.recipesService.deleteNode(this.chapter.id);
+    this.router.navigateByUrl('/');
   }
 
 }

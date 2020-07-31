@@ -45,6 +45,12 @@ export class RecipesService {
     return this.getNodeByIdRec(idArray);
   }
 
+  getParentNodeById(id: string): RecipesNode {
+    const idArray = id.split('-');
+    idArray.pop();
+    return this.getNodeByIdRec(idArray);
+  }
+
   getNodeByIdRec(id: string[]): RecipesNode{
     if (id.length === 1) {
       return this.recipes; // chapter.children.find(chptr => chptr.id === id.join('-'));
@@ -120,6 +126,11 @@ export class RecipesService {
   delete(): void {
     this.storage.set('book', JSON.stringify(Recipes));
     this.recipes = Recipes;
+  }
+
+  deleteNode(nodeId: string): void {
+    const parent = this.getParentNodeById(nodeId);
+    parent.children = parent.children.filter(child => child.id !== nodeId);
   }
 
   requestCompilation(): void {

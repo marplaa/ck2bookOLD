@@ -73,7 +73,7 @@ export class Renderer {
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
           const img: Image = {
             url: item.image, sizes: [{size: twoColTemplate.recipeImageRes, filter: {}},
-              {size: twoColTemplate.recipeBgImageRes, filter: {blur: 15}}]
+              {size: twoColTemplate.recipeBgImageRes, filter: {blur: 15, brightness: 1.5}}]
           };
           this.imageList.push(img);
         }
