@@ -52,7 +52,7 @@ export class Renderer {
 
         // check if image is already in list
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
-          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.chapterImageRes,  filter: {}}], };
+          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.chapterImageRes, filter: {}}],};
           this.imageList.push(img);
         }
 
@@ -66,13 +66,15 @@ export class Renderer {
         // item is a recipe
         renderedItem = twoColTemplate.recipe.replace('{{title}}', item.title);
         renderedItem = renderedItem.replace('{{text}}', this.htmlToTex(item.text));
-        renderedItem = renderedItem.replace('{{ingredients}}', item.title);
+        renderedItem = renderedItem.replace('{{ingredients}}', this.renderTable(item.ingredients));
         renderedItem = renderedItem.replace('{{image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.recipeImageRes);
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.recipeBgImageRes);
 
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
-          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.recipeImageRes,  filter: {}},
-              {size: twoColTemplate.recipeBgImageRes,  filter: {blur: 15}}]};
+          const img: Image = {
+            url: item.image, sizes: [{size: twoColTemplate.recipeImageRes, filter: {}},
+              {size: twoColTemplate.recipeBgImageRes, filter: {blur: 15}}]
+          };
           this.imageList.push(img);
         }
         output += renderedItem;
@@ -87,38 +89,56 @@ export class Renderer {
     // replace <strong>
     let regex = /<\s*strong[^>]*>(.*?)<\s*\/\s*strong>/g;
     let tags = text.match(regex);
-    console.log(tags[1]);
-    for (let tag of tags) {
-      console.log(tag);
-      const newTag = '\\textbf{' + tag.replace('<strong>', '').replace('</strong>', '') + '}';
-      console.log(newTag);
-      text = text.replace(tag, newTag);
+    if (tags) {
+      for (let tag of tags) {
+        console.log(tag);
+        const newTag = '\\textbf{' + tag.replace('<strong>', '').replace('</strong>', '') + '}';
+        console.log(newTag);
+        text = text.replace(tag, newTag);
+      }
     }
 
     // replace <p>
     regex = /<\s*p[^>]*>(.*?)<\s*\/\s*p>/g;
     tags = text.match(regex);
-    console.log(tags[1]);
-    for (let tag of tags) {
-      console.log(tag);
-      const newTag = tag.replace('<p>', '').replace('</p>', '') + '\\newline\n';
-      console.log(newTag);
-      text = text.replace(tag, newTag);
+    if (tags) {
+      for (let tag of tags) {
+        console.log(tag);
+        const newTag = tag.replace('<p>', '').replace('</p>', '') + '\\newline\n';
+        console.log(newTag);
+        text = text.replace(tag, newTag);
+      }
     }
 
     // replace <u>
     regex = /<\s*u[^>]*>(.*?)<\s*\/\s*u>/g;
     tags = text.match(regex);
-    console.log(tags[1]);
-    for (let tag of tags) {
-      console.log(tag);
-      const newTag = '\\uline{' + tag.replace('<u>', '').replace('</u>', '') + '}';
-      console.log(newTag);
-      text = text.replace(tag, newTag);
+    if (tags) {
+      for (let tag of tags) {
+        console.log(tag);
+        const newTag = '\\uline{' + tag.replace('<u>', '').replace('</u>', '') + '}';
+        console.log(newTag);
+        text = text.replace(tag, newTag);
+      }
     }
+
+    // replace <u>
+    text = text.replace('</b>', ' \\\\\n');
+
 
     // console.log(newTag);
     return text;
+  }
+
+  renderTable(ingredients: string[][]): string {
+    let table = "\\begin{tabular}{r l}\n";
+    for (let ingredient of ingredients) {
+      if ( ingredient.length === 2) {
+        table += ingredient[0] + ' & ' + ingredient[1] + ' \\\\\n';
+      }
+    }
+    table += '\\end{tabular}\n';
+    return table;
   }
 
 }

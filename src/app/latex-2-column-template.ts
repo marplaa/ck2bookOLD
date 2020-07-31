@@ -1,20 +1,35 @@
 
 export const twoColTemplate = {
   chapterImageRes: '2480x3508',
-  recipeImageRes: '800x600',
+  recipeImageRes: '900x675',
   recipeBgImageRes: '2480x3508',
   frame: '\\documentclass[12pt, a4paper]{book}\n' +
     '\\usepackage[utf8]{inputenc}\n' +
+    '\\usepackage[german]{babel}\n' +
     '\\usepackage[top=1.5cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}\n' +
     '\\usepackage{multicol}\n' +
     '\\setlength{\\columnsep}{1cm}\n' +
     '\\usepackage{graphicx}\n' +
     '\\usepackage{ulem}\n' +
     '\\usepackage{wrapfig}\n' +
+    '\\usepackage{titlesec}\n' +
     '\\usepackage{wallpaper}\n' +
     '\\usepackage[breakable]{tcolorbox}\n' +
-    '\\graphicspath{{images/}} %Setting the graphicspath' +
+    '\\graphicspath{{images/}} %Setting the graphicspath\n' +
     '\n' +
+    '\\titleformat{\\chapter}[display]\n' +
+    '{}\n' +
+    '{}\n' +
+    '{1ex}\n' +
+    '{\\bfseries\\Huge\\begin{mytextbox}\\vspace{0.5ex}}\n' +
+    '[\\end{mytextbox}]\n' +
+    '\n' +
+    '\\titleformat{\\section}[display]\n' +
+    '{}\n' +
+    '{}\n' +
+    '{0ex}\n' +
+    '{\\bfseries\\Large}\n' +
+    '[]' +
     '\n' +
     '\\newtcolorbox{mytextbox}[1][]{%\n' +
     '\tstandard jigsaw,\n' +
@@ -26,7 +41,7 @@ export const twoColTemplate = {
     '\n' +
     '\\begin{document}\n' +
 
-    '\\tableofcontents{}' +
+    '\\tableofcontents{}\n' +
 
     '\n' +
     '\t\t{{content}}\n' +
@@ -44,7 +59,7 @@ export const twoColTemplate = {
     '\n' +
     '\n' +
     '  \\begin{center}\n' +
-    '    \\includegraphics[width=7cm]{{{image}}}\n' +
+    '    \\includegraphics[width=7.8cm]{{{image}}}\n' +
     '  \\end{center}\n' +
 
     '\n' +
