@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {RecipesNode} from '../../recipes-node';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-chapter-entry',
@@ -13,5 +14,6 @@ export class ChapterEntryComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }

@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Recipe} from '../recipes-node';
+import {Recipe, RecipesNode} from '../recipes-node';
 import { RecipesService } from '../recipes.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
+import {DialogComponent} from '../dialog/dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 
@@ -19,7 +21,11 @@ export class RecipeComponent implements OnInit {
   };
   model: string;
 
-  constructor(private recipesService: RecipesService, private route: ActivatedRoute, private location: Location) {
+  constructor(private recipesService: RecipesService,
+              private route: ActivatedRoute,
+              private location: Location,
+              private router: Router,
+              private dialog: MatDialog) {
     this.recipe = recipesService.getRecipeById(this.route.snapshot.paramMap.get('id'));
   }
 
@@ -30,6 +36,22 @@ export class RecipeComponent implements OnInit {
     console.log(this.model);
   }
 
+  openDeleteDialog(chapter: RecipesNode): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: chapter
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete();
+      }
+    });
+  }
+
+  delete(): void {
+    this.recipesService.deleteNode(this.recipe.id);
+    this.router.navigateByUrl('/');
+  }
 
 
 

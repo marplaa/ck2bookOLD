@@ -66,12 +66,7 @@
               <ng-template #isChapter>
 
 
-                <app-chapter-entry [node]="node"></app-chapter-entry>
-
-
-
-
-
+                <a  routerLink="/chapter/{{node.id}}">{{node.title}}</a>
 
 
                 <ng-container *ngIf="isBottomChapter(node) || node.children.length === 0">
