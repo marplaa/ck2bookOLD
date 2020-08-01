@@ -74,16 +74,22 @@ export class RecipesService {
 
 
   addRecipe(chapter: RecipesNode, url: string): void {
-    this.getRecipeFromUrl(url)
-      .subscribe(recipe => {
-          recipe.id = this.generateId(chapter, recipe.title);
-          this.recipe = recipe;
-          chapter.children.push(recipe);
-          console.log(recipe);
-          // this.makeIngredientsArray(recipe);
+    for (let r of url.split('\n')) {
+      if (r.startsWith('http')) {
+        this.getRecipeFromUrl(r)
+          .subscribe(recipe => {
+              recipe.id = this.generateId(chapter, recipe.title);
+              this.recipe = recipe;
+              chapter.children.push(recipe);
+              // this.makeIngredientsArray(recipe);
 
-        }
-      );
+            }
+          );
+      } else if (isNaN(Number(r))) {
+        // TODO build link from recipe ID
+      }
+    }
+
     chapter.isBottomChapter = true;
   }
 
