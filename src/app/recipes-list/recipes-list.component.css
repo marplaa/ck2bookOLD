@@ -29,6 +29,20 @@
 
 }
 
-.tree ul {
-  padding-left: 12px;
+.tree li a{
+  color: black;
 }
+.tree ul {
+  border-left: 1px solid lightgray;
+  padding-left: 12px;
+  list-style-type: none
+}
+
+.recipe-title {
+  color: black;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: beige;
+}
+
+

@@ -32,7 +32,7 @@
 
       <div class="recipes-list-wrapper">
         <div class="tree">
-          <ul>
+          <ul style="border: none">
             <li>Mein Kochbuch
               <button class="float-right" mat-icon-button (click)="openNewChapterModal(newChapterModal, '000')">
                 <mat-icon>
@@ -57,13 +57,15 @@
               -->
               <ng-container *ngIf="isRecipe(node); else isChapter">
                 <!--              <a (click)="selectRecipe(node)">{{node.title}}</a>-->
-                <a routerLink="/detail/{{node.id}}"
-                   (mouseover)="recipe=recipesService.getRecipeById(node.id)">{{node.title}}</a>
+                <div >
+                  <a class="recipe-title" routerLink="/detail/{{node.id}}"
+                     (mouseover)="recipe=recipesService.getRecipeById(node.id)">{{node.title}}</a>
+                </div>
 
               </ng-container>
               <ng-template #isChapter>
                 <a routerLink="/chapter/{{node.id}}">{{node.title}}</a>
-                <div class="float-right">
+
 
 
                   <ng-container *ngIf="isBottomChapter(node) || node.children.length === 0">
@@ -84,7 +86,7 @@
                   </ng-container>
 
 
-                </div>
+
 
 
                 <ul *ngIf="hasChild(node)">
