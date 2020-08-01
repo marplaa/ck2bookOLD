@@ -64,11 +64,17 @@
 
               </ng-container>
               <ng-template #isChapter>
-                <a routerLink="/chapter/{{node.id}}">{{node.title}}</a>
+
+
+                <app-chapter-entry [node]="node"></app-chapter-entry>
 
 
 
-                  <ng-container *ngIf="isBottomChapter(node) || node.children.length === 0">
+
+
+
+
+                <ng-container *ngIf="isBottomChapter(node) || node.children.length === 0">
                     <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, node.id)">
                       <mat-icon>
                         note_add

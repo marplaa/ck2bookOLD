@@ -27,6 +27,7 @@ import { RecipePreviewComponent } from './recipe-preview/recipe-preview.componen
 import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ChapterEntryComponent } from './recipes-list/chapter-entry/chapter-entry.component';
 
 
 
@@ -41,6 +42,8 @@ import {MatMenuModule} from '@angular/material/menu';
     RecipePreviewComponent,
     ChapterDetailComponent,
     DialogComponent,
+
+    ChapterEntryComponent,
   ],
   imports: [
     BrowserModule,
