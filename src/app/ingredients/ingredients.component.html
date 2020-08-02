@@ -24,7 +24,7 @@
 <div cdkDropListGroup>
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
 
-    <div class="example-box" *ngFor="let ingredient of recipe.ingredients" cdkDrag (click)="ingredient[0]='ddd'">
+    <div class="example-box" *ngFor="let ingredient of recipe.ingredients" cdkDrag>
 
       <table width="100%">
         <tr>
