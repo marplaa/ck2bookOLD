@@ -17,7 +17,7 @@ import {chapterImages} from '../chapter-images';
 export class ChapterDetailComponent implements OnInit {
 
   modules = {toolbar: [
-      ['bold', 'italic', 'underline', 'strike']]
+      ['bold', 'italic', 'underline']]
   };
   model: string;
   chapter: RecipesNode;
