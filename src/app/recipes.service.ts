@@ -73,24 +73,30 @@ export class RecipesService {
   }
 
 
-  addRecipe(chapter: RecipesNode, url: string): void {
-    for (let r of url.split('\n')) {
+  addRecipe(chapter: RecipesNode, urls: string): void {
+    let url = '';
+    for (let r of urls.split('\n')) {
       if (r.startsWith('http')) {
-        this.getRecipeFromUrl(r)
-          .subscribe(recipe => {
-              recipe.id = this.generateId(chapter, recipe.title);
-              this.recipe = recipe;
-              chapter.children.push(recipe);
-              // this.makeIngredientsArray(recipe);
-
-            }
-          );
-      } else if (isNaN(Number(r))) {
+        url = r;
+      } else if (!isNaN(Number(r))) {
         // TODO build link from recipe ID
+        url = 'https://www.chefkoch.de/rezepte/' + r;
       }
+      this.scrapeRecipe(chapter, url);
     }
-
     chapter.isBottomChapter = true;
+  }
+
+  scrapeRecipe(chapter: RecipesNode, url: string): void {
+    this.getRecipeFromUrl(url)
+      .subscribe(recipe => {
+          recipe.id = this.generateId(chapter, recipe.title);
+          this.recipe = recipe;
+          chapter.children.push(recipe);
+          // this.makeIngredientsArray(recipe);
+
+        }
+      );
   }
 
   generateId(parent: RecipesNode, text: string): string {

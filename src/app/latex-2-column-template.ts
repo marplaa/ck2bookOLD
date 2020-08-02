@@ -71,19 +71,13 @@ export const twoColTemplate = {
     '\n' +
     '  {{text}}\n' +
     '\n' +
-    '\\end{mytextbox}' +
+    '\\end{mytextbox}\n \\hfill \n' +
   '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n',
 
   chapter:
 
-    //'\\newpage\n' +
- //   '\t\\begin{multicols}{2}\n' +
- //   '\t\\end{multicols}\n' +
- //   'CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER' +
-
-
     '  \\chapter{{{title}}}\n' +
-    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
+    '  \\CenterWallPaper{1}{{{bg-image}}}\n' +
     '\\begin{mytextbox}\n' +
     '{{text}}' +
     '\\end{mytextbox}\n' +
@@ -96,7 +90,7 @@ export const twoColTemplate = {
     '\t\\end{multicols}\n',
 
   chapter_w_subchapters:
-    '\\newpage\n' +
+   // '\\newpage\n' +
    // 'CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER CHAPTER' +
 
 
