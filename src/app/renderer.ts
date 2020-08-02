@@ -47,7 +47,11 @@ export class Renderer {
         } else {
           renderedItem = twoColTemplate.chapter_w_subchapters.replace('{{title}}', item.title);
         }
-        renderedItem = renderedItem.replace('{{text}}', item.text);
+        let text = '';
+        if (item.text !== null) {
+          text = '\\begin{mytextbox}' + this.htmlToTex(item.text) + '\\end{mytextbox}\n';
+        }
+        renderedItem = renderedItem.replace('{{text}}', text);
         renderedItem = renderedItem.replace('{{bg-image}}', Md5.hashStr(item.image) + '-' + twoColTemplate.chapterImageRes);
 
         // check if image is already in list

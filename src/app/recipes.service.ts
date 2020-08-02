@@ -143,6 +143,9 @@ export class RecipesService {
   deleteNode(nodeId: string): void {
     const parent = this.getParentNodeById(nodeId);
     parent.children = parent.children.filter(child => child.id !== nodeId);
+    if (parent.isBottomChapter && parent.children.length === 0) {
+      parent.isBottomChapter = false;
+    }
   }
 
   requestCompilation(): void {
