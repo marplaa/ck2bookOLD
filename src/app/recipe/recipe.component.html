@@ -24,7 +24,7 @@
         <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
 
-      <app-image-list [node]="recipe"></app-image-list>
+      <app-image-list [node]="recipe" [images]="recipe.images"></app-image-list>
       <div style="height: 500px">
         <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
       </div>

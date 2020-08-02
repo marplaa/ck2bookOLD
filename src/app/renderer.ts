@@ -56,7 +56,7 @@ export class Renderer {
 
         // check if image is already in list
         if (this.imageList.filter(img => img[0] === item.image).length === 0) {
-          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.chapterImageRes, filter: {}}],};
+          const img: Image = {url: item.image, sizes: [{size: twoColTemplate.chapterImageRes, filter: {}}] };
           this.imageList.push(img);
         }
 
@@ -94,7 +94,7 @@ export class Renderer {
     let regex = /<\s*strong[^>]*>(.*?)<\s*\/\s*strong>/g;
     let tags = text.match(regex);
     if (tags) {
-      for (let tag of tags) {
+      for (const tag of tags) {
 
         const newTag = '\\textbf{' + tag.replace('<strong>', '').replace('</strong>', '') + '}';
 
@@ -106,7 +106,7 @@ export class Renderer {
     regex = /<\s*p[^>]*>(.*?)<\s*\/\s*p>/g;
     tags = text.match(regex);
     if (tags) {
-      for (let tag of tags) {
+      for (const tag of tags) {
 
         const newTag = tag.replace('<p>', '').replace('</p>', '') + '\\newline\n';
 
@@ -118,7 +118,7 @@ export class Renderer {
     regex = /<\s*u[^>]*>(.*?)<\s*\/\s*u>/g;
     tags = text.match(regex);
     if (tags) {
-      for (let tag of tags) {
+      for (const tag of tags) {
 
         const newTag = '\\uline{' + tag.replace('<u>', '').replace('</u>', '') + '}';
 
@@ -128,20 +128,27 @@ export class Renderer {
 
 
     text = text.replace(/<\/br>/g, ' \\\\\n');
+    text = text.replace(/%/g, '\\%');
 
     // console.log(newTag);
+    return text;
+  }
+
+
+  texSave(text: string): string {
+    text = text.replace(/%/g, '\\%');
     return text;
   }
 
   renderTable(ingredients: string[]): string {
     console.log(ingredients);
     let table = '\\begin{tabulary}{7.8cm}{R|L}\n';
-    for (let ingredient of ingredients) {
+    for (const ingredient of ingredients) {
       if ( ingredient.length === 2) {
-        table += ingredient[0] + ' & ' + ingredient[1] + ' \\\\\n';
+        table += this.texSave(ingredient[0]) + ' & ' + this.texSave(ingredient[1]) + ' \\\\\n';
       } else if (ingredient.length === 1) {
         if (ingredient[0] !== '') {
-          table += '\\hline\n\\textbf{' + ingredient[0] +  '} \\\\\n';
+          table += '\\hline\n\\textbf{' + this.texSave(ingredient[0]) +  '} \\\\\n';
         }
       }
     }

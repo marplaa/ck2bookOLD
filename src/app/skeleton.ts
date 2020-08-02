@@ -1,5 +1,5 @@
 import {Recipe, RecipesNode} from './recipes-node';
-import {images} from './chapter-images';
+import {chapterImages} from './chapter-images';
 
 const recipe: Recipe = {
   url: 'https://www.chefkoch.de/rezepte/2455511386627445/Quinoa-Powersalat-mit-Tomaten-und-Avocado.html',
@@ -116,7 +116,7 @@ export const Recipes: RecipesNode =
   {
     id: '000',
     title: 'root',
-    images: images.cooking,
+    images: chapterImages.cooking,
     image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
     text: '',
     isBottomChapter: false,
@@ -124,7 +124,7 @@ export const Recipes: RecipesNode =
       {
         id: '000-001',
         title: 'Kochen',
-        images: images.cooking,
+        images: chapterImages.cooking,
         image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
         text: '',
         isBottomChapter: false,
@@ -133,7 +133,7 @@ export const Recipes: RecipesNode =
             id: '000-001-001',
             text: '',
             title: 'Suppen',
-            images: images.cooking,
+            images: chapterImages.cooking,
             image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
             isBottomChapter: false,
             children: [
@@ -144,7 +144,7 @@ export const Recipes: RecipesNode =
             id: '000-001-002',
             text: '',
             title: 'Eintöpfe',
-            images: images.cooking,
+            images: chapterImages.cooking,
             image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
             isBottomChapter: false,
             children: [
@@ -157,7 +157,7 @@ export const Recipes: RecipesNode =
         id: '000-002',
         title: 'Backen',
         text: '',
-        images: images.cooking,
+        images: chapterImages.cooking,
         image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
         isBottomChapter: true,
         children: [
@@ -169,7 +169,7 @@ export const Recipes: RecipesNode =
         id: '000-003',
         title: 'Trinken',
         text: '',
-        images: images.cooking,
+        images: chapterImages.cooking,
         image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
         isBottomChapter: false,
         children: [

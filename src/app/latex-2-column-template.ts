@@ -3,7 +3,7 @@ export const twoColTemplate = {
   chapterImageRes: '2480x3508',
   recipeImageRes: '900x675',
   recipeBgImageRes: '2480x3508',
-  frame: '\\documentclass[11pt, a4paper]{book}\n' +
+  frame: '\\documentclass[11pt, a4paper, openany]{book}\n' +
     '\\usepackage[utf8]{inputenc}\n' +
     '\\usepackage[german]{babel}\n' +
     '\\usepackage[top=1.5cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}\n' +
@@ -77,7 +77,7 @@ export const twoColTemplate = {
   chapter:
 
     '  \\chapter{{{title}}}\n' +
-    '  \\CenterWallPaper{1}{{{bg-image}}}\n' +
+    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
    // '\\begin{mytextbox}\n' +
     '{{text}}' +
   //  '\\end{mytextbox}\n' +

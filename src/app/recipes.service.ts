@@ -5,7 +5,7 @@ import {Recipe, RecipesNode} from './recipes-node';
 import {Recipes} from './skeleton';
 import {Md5} from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { images } from './chapter-images';
+import { chapterImages } from './chapter-images';
 import {twoColTemplate} from './latex-2-column-template';
 import {RenderedBook, Renderer} from './renderer';
 import {catchError} from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class RecipesService {
 
   recipes = Recipes;
   recipe: Recipe;
-  chapter: RecipesNode = {id: '', title: '', children: [], image: '', images: images.cooking, text: ''};
+  chapter: RecipesNode = {id: '', title: '', children: [], image: '', images: chapterImages.cooking, text: ''};
 
   constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: StorageService) {
     const loadedRecipes = JSON.parse(this.storage.get('book'));
@@ -121,8 +121,8 @@ export class RecipesService {
 
     const newChapter = {
       id: newId,
-      images: images.cooking,
-      image: images.cooking[0],
+      images: chapterImages.cooking,
+      image: chapterImages.cooking[0],
       title,
       text: 'Lorem ipsum',
       isBottomChapter: false,

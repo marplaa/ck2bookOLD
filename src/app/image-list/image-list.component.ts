@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe, RecipesNode} from '../recipes-node';
+import {chapterImages} from '../chapter-images';
 
 
 
@@ -11,19 +12,22 @@ import {Recipe, RecipesNode} from '../recipes-node';
 export class ImageListComponent implements OnInit {
 
   @Input() node: RecipesNode;
+  @Input() images: string[];
   page = 1;
   displayedImages: string[];
+
+
   constructor() { }
 
   ngOnInit(): void {
-    this.displayedImages = this.node.images.slice(0, 8);
+    this.displayedImages = this.images.slice(0, 8);
   }
 
   selectPage(direction: number): void {
-    const numPages = Math.ceil(this.node.images.length / 8);
+    const numPages = Math.ceil(this.images.length / 8);
     this.page = (this.page + direction + numPages) % numPages;
 
-    this.displayedImages = this.node.images.slice(this.page * 8, this.page * 8 + 8);
+    this.displayedImages = this.images.slice(this.page * 8, this.page * 8 + 8);
   }
 
 }
