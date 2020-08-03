@@ -1,5 +1,6 @@
 import {Recipe, RecipesNode} from './recipes-node';
 import {chapterImages} from './chapter-images';
+import {standardOptions} from './options';
 
 const recipe: Recipe = {
   url: 'https://www.chefkoch.de/rezepte/2455511386627445/Quinoa-Powersalat-mit-Tomaten-und-Avocado.html',
@@ -107,7 +108,8 @@ const recipe: Recipe = {
     'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/1041025/crop-276x276/quinoa-powersalat-mit-tomaten-und-avocado.jpg'
   ],
   image: 'https://img.chefkoch-cdn.de/rezepte/2455511386627445/bilder/964744/crop-360x240/quinoa-powersalat-mit-tomaten-und-avocado.jpg',
-  id: '000-002-f75'
+  id: '000-002-f75',
+  options: standardOptions
 };
 
 export const Recipes: RecipesNode =
@@ -138,7 +140,8 @@ export const Recipes: RecipesNode =
             isBottomChapter: false,
             children: [
 
-            ]
+            ],
+            options: standardOptions
           },
           {
             id: '000-001-002',
@@ -149,9 +152,11 @@ export const Recipes: RecipesNode =
             isBottomChapter: false,
             children: [
 
-            ]
+            ],
+            options: standardOptions
           },
-        ]
+        ],
+        options: standardOptions
       },
       {
         id: '000-002',
@@ -163,7 +168,8 @@ export const Recipes: RecipesNode =
         children: [
           recipe
 
-        ]
+        ],
+        options: standardOptions
       },
       {
         id: '000-003',
@@ -174,9 +180,11 @@ export const Recipes: RecipesNode =
         isBottomChapter: false,
         children: [
 
-        ]
+        ],
+        options: standardOptions
       }
-    ]
+    ],
+    options: standardOptions
   }
 
 ;

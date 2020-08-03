@@ -28,6 +28,7 @@ import { ChapterDetailComponent } from './chapter-detail/chapter-detail.componen
 import { DialogComponent } from './dialog/dialog.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ChapterEntryComponent } from './recipes-list/chapter-entry/chapter-entry.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -62,7 +63,8 @@ import { ChapterEntryComponent } from './recipes-list/chapter-entry/chapter-entr
     MatGridListModule,
     MatDividerModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ],
   entryComponents: [DialogComponent],
   providers: [],

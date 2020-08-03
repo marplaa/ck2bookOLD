@@ -1,5 +1,6 @@
 import {newArray} from '@angular/compiler/src/util';
 import {skipUntil} from 'rxjs/operators';
+import {Options} from './options';
 
 
 export interface RecipesNode {
@@ -10,6 +11,7 @@ export interface RecipesNode {
   images?: string[];
   children?: RecipesNode[];
   isBottomChapter?: boolean;
+  options: Options;
 }
 
 export class Recipe implements RecipesNode{
@@ -21,6 +23,7 @@ export class Recipe implements RecipesNode{
   recipeInfo: string[][];
   id: string;
   text: string;
+  options: Options;
   constructor(title: string) {
     this.title = title;
   }

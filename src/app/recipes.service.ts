@@ -9,6 +9,7 @@ import { chapterImages } from './chapter-images';
 import {twoColTemplate} from './latex-2-column-template';
 import {RenderedBook, Renderer} from './renderer';
 import {catchError} from 'rxjs/operators';
+import {standardOptions} from './options';
 
 interface CompilationResponse{
   url: string;
@@ -22,7 +23,7 @@ export class RecipesService {
 
   recipes = Recipes;
   recipe: Recipe;
-  chapter: RecipesNode = {id: '', title: '', children: [], image: '', images: chapterImages.cooking, text: ''};
+  chapter: RecipesNode = {id: '', title: '', children: [], image: '', images: chapterImages.cooking, text: '', options: standardOptions};
 
   constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: StorageService) {
     const loadedRecipes = JSON.parse(this.storage.get('book'));
@@ -126,7 +127,8 @@ export class RecipesService {
       title,
       text: 'Lorem ipsum',
       isBottomChapter: false,
-      children: []
+      children: [],
+      options: standardOptions
     };
     chapter.children.push(newChapter);
   }
