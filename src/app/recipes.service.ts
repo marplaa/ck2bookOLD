@@ -7,13 +7,15 @@ import {Md5} from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { chapterImages } from './chapter-images';
 import {twoColTemplate} from './latex-2-column-template';
-import {RenderedBook, Renderer} from './renderer';
+import { RenderedBook} from './renderer.service';
 import {catchError} from 'rxjs/operators';
 import {standardOptions} from './options';
+import { RendererService } from './renderer.service';
 
 interface CompilationResponse{
   url: string;
 }
+
 
 
 @Injectable({
@@ -25,11 +27,12 @@ export class RecipesService {
   recipe: Recipe;
   chapter: RecipesNode = {id: '', title: '', children: [], image: '', images: chapterImages.cooking, text: '', options: standardOptions};
 
-  constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: StorageService) {
+  constructor(private http: HttpClient, @Inject(LOCAL_STORAGE) private storage: StorageService, private renderer: RendererService) {
     const loadedRecipes = JSON.parse(this.storage.get('book'));
     if (loadedRecipes) {
       this.recipes = loadedRecipes;
     }
+    this.renderer.recipesService = this;
   }
 
   getRecipeFromUrl(url: string): Observable<Recipe> {
@@ -152,15 +155,15 @@ export class RecipesService {
 
   requestCompilation(): void {
     const url = 'http://localhost:4200/compile/toPdf';
-    const renderer = new Renderer();
-    const renderedBook = renderer.render(this.recipes);
+    // const renderer = new Renderer();
+    const renderedBook = this.renderer.render(this.recipes);
     this.http.post<CompilationResponse>(url , {content: renderedBook.content, images: renderedBook.images})
       .subscribe(data => console.log(data.url));
   }
 
   render(): RenderedBook {
-    const renderer = new Renderer();
-    return renderer.render(this.recipes);
+    // const renderer = new Renderer();
+    return this.renderer.render(this.recipes);
   }
 
 

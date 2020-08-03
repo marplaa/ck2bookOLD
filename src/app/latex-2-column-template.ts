@@ -72,12 +72,14 @@ export const twoColTemplate = {
     '  {{text}}\n' +
     '\n' +
     '\\end{mytextbox}\n \\hfill \n' +
-  '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n',
+  // '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n',
+    '{{bg-image}}',
 
   chapter:
 
     '  \\chapter{{{title}}}\n' +
-    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
+    //'  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
+    '{{bg-image}}' +
    // '\\begin{mytextbox}\n' +
     '{{text}}' +
   //  '\\end{mytextbox}\n' +
@@ -95,12 +97,16 @@ export const twoColTemplate = {
 
 
     '  \\chapter{{{title}}}\n' +
-    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
+  //  '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n' +
+    '{{bg-image}}' +
  //   '\\begin{mytextbox}\n' +
     '{{text}}' +
   //  '\\end{mytextbox}\n' +
 
-    '{{children}}'
+    '{{children}}',
+
+  background:
+    '  \\ThisCenterWallPaper{1}{{{bg-image}}}\n',
 
 };
 
