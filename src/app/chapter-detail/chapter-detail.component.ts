@@ -9,6 +9,7 @@ import {DialogComponent} from '../dialog/dialog.component';
 import {chapterImages} from '../chapter-images';
 
 
+
 @Component({
   selector: 'app-chapter-detail',
   templateUrl: './chapter-detail.component.html',

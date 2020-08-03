@@ -1,7 +1,16 @@
+export const background = {
+  NONE: 'NONE',
+  CHAPTER: 'CHAPTER',
+  RECIPE: 'RECIPE'
+};
+
 export interface Options {
-  recipeImageAsBackground: boolean;
+  recipeBackgrounds: string;
+  background: string;
 }
 
-export const standardOptions = {
-  recipeImageAsBackground: true
+export const standardOptions: Options = {
+  recipeBackgrounds: 'RECIPE',
+  background: 'IMAGE'
+
 };
