@@ -21,7 +21,7 @@ export class RecipesListComponent implements OnInit {
   renderOutput: string;
 
   newChapterTitle = '';
-  newRecipeUrl: 'https://www.chefkoch.de/rezepte/1247411229689036/Pizza-Baellchen.html';
+  newRecipeUrl: '';
 
 
   constructor(public recipesService: RecipesService,
@@ -51,14 +51,14 @@ export class RecipesListComponent implements OnInit {
   openNewChapterModal(content, chapter: string): void {
     this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      if (result === 's') {this.recipesService.addChapter(this.chapter, this.newChapterTitle); }
+      if (result === 's') {this.recipesService.addChapter(this.chapter, this.newChapterTitle); this.newChapterTitle = ''; }
     });
   }
 
   openNewRecipeModal(content, chapter: string): void {
     this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'nr-title'}).result.then((result) => {
-      if (result === 's') {this.recipesService.addRecipe(this.chapter, this.newRecipeUrl); }
+      if (result === 's') {this.recipesService.addRecipe(this.chapter, this.newRecipeUrl); this.newRecipeUrl = ''; }
     });
   }
 

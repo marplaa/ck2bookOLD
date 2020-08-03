@@ -131,7 +131,10 @@ export class RecipesService {
       text: 'Lorem ipsum',
       isBottomChapter: false,
       children: [],
-      options: standardOptions
+      options: {
+        recipeBackgrounds: 'RECIPE',
+        background: 'IMAGE'
+      }
     };
     chapter.children.push(newChapter);
   }
