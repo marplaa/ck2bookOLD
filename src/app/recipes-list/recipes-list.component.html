@@ -1,0 +1,163 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-12">
+      <div id="navbar">
+        <button mat-raised-button [matMenuTriggerFor]="menu">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="recipesService.save()">
+            <mat-icon>save</mat-icon>
+            Speichern
+          </button>
+          <button mat-menu-item (click)="recipesService.delete()">
+            <mat-icon>delete</mat-icon>
+            Löschen
+          </button>
+
+        </mat-menu>
+        <button mat-raised-button class="float-right" (click)="render()">
+          <mat-icon>print</mat-icon>
+          Rendern2Tex
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-8">
+
+
+      <div class="recipes-list-wrapper">
+        <div class="tree">
+          <ul style="border: none">
+            <li>Mein Kochbuch
+              <button class="float-right" mat-icon-button (click)="openNewChapterModal(newChapterModal, '000')">
+                <mat-icon>
+                  book
+                </mat-icon>
+              </button>
+            </li>
+            <li>
+              <ul>
+                <ng-container
+                  *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: recipes.children }"></ng-container>
+              </ul>
+            </li>
+
+          </ul>
+
+
+          <ng-template #recursiveListTmpl let-list="recipes">
+            <li *ngFor="let node of list">
+              <!--
+              is recipe or chapter?
+              -->
+              <ng-container *ngIf="isRecipe(node); else isChapter">
+                <!--              <a (click)="selectRecipe(node)">{{node.title}}</a>-->
+                <div >
+                  <a class="recipe-title" routerLink="/detail/{{node.id}}"
+                     (mouseover)="recipe=recipesService.getRecipeById(node.id)">{{node.title}}</a>
+                </div>
+
+              </ng-container>
+              <ng-template #isChapter>
+
+
+                <a  routerLink="/chapter/{{node.id}}">{{node.title}}</a>
+
+
+                <ng-container *ngIf="isBottomChapter(node) || node.children.length === 0">
+                    <button mat-icon-button (click)="openNewRecipeModal(newRecipeModal, node.id)">
+                      <mat-icon>
+                        note_add
+                      </mat-icon>
+                    </button>
+                  </ng-container>
+
+                  <ng-container *ngIf="!isBottomChapter(node)">
+                    <button mat-icon-button (click)="openNewChapterModal(newChapterModal, node.id)">
+                      <mat-icon>
+                        book
+                      </mat-icon>
+                    </button>
+
+                  </ng-container>
+
+
+
+
+
+                <ul *ngIf="hasChild(node)">
+                  <ng-container
+                    *ngTemplateOutlet="recursiveListTmpl; context:{ recipes: node.children }"></ng-container>
+                </ul>
+
+
+              </ng-template>
+
+
+            </li>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="sticky-top">
+        <app-recipe-preview *ngIf="recipe" [recipe]="recipe"></app-recipe-preview>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<ng-template #newChapterModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Neues Kapitel unter "{{chapter.title}}" erstellen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="newChapterTitle">Neues Kapitel</label>
+        <div class="input-group">
+          <input class="form-control" id="newChapterTitle" type="text" placeholder="Titel des neuen Kapitels"
+                 name="newChapterName" [(ngModel)]="newChapterTitle" style="margin-bottom: 10px">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('s')">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #newRecipeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="nr-title">Neues Rezept unter "{{chapter.title}}" hinzufügen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="newChapterTitle">Neues Rezept</label>
+        <div class="input-group">
+          <textarea class="form-control" id="newRecipeUrl" type="text" placeholder="https://www.example.com"
+                    name="newRecipeUrl" [(ngModel)]="newRecipeUrl" style="margin-bottom: 10px"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('s')">Save</button>
+  </div>
+</ng-template>
+
+

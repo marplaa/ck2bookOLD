@@ -1,0 +1,82 @@
+<div class="container">
+
+
+  <div class="row">
+    <div class="col-12">
+      <div id="navbar">
+
+        <a routerLink="/">
+          <button mat-raised-button color="primary">zurück</button>
+        </a>
+
+        <button mat-flat-button color="warn" class="float-right" (click)="openDeleteDialog(chapter)">Kapitel löschen
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-9">
+
+      <mat-card>
+
+            <mat-form-field style="width: 100%">
+              <input type="text" placeholder="Titel" matInput [(ngModel)]="chapter.title"
+                     style="font-size: 20pt; margin-bottom: 10px">
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+
+        <app-image-list *ngIf="chapter.options.background === 'IMAGE'" [node]="chapter" [images]="chapterImages"></app-image-list>
+        <mat-card-content>
+          <div style="height: 500px">
+            <div style="height: 450px">
+              <quill-editor [modules]="modules" [(ngModel)]="chapter.text"></quill-editor>
+            </div>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+
+
+
+    </div>
+    <div class="col-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Optionen</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <label id="background-label">Hintergrund</label>
+          <mat-radio-group
+            aria-labelledby="background-label"
+            class="radio-group"
+            [(ngModel)]="chapter.options.background">
+            <mat-radio-button value="NONE">kein Hintergrund</mat-radio-button>
+            <mat-radio-button value="IMAGE">Bild</mat-radio-button>
+          </mat-radio-group>
+
+
+          <label id="recipe-background-label">Hintergründe der Rezepte</label>
+          <mat-radio-group
+            aria-labelledby="recipe-background-label"
+            class="radio-group"
+            [(ngModel)]="chapter.options.recipeBackgrounds">
+            <mat-radio-button value="NONE">kein Hintergrund</mat-radio-button>
+            <mat-radio-button value="CHAPTER">Kapitelhintergrund</mat-radio-button>
+            <mat-radio-button value="RECIPE">Rezeptbilder als Hintergründe</mat-radio-button>
+          </mat-radio-group>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+
+  </div>
+
+</div>
+
