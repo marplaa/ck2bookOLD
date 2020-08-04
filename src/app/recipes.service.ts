@@ -11,6 +11,7 @@ import { RenderedBook} from './renderer.service';
 import {catchError} from 'rxjs/operators';
 import {standardOptions} from './options';
 import { RendererService } from './renderer.service';
+import { saveAs } from 'file-saver';
 
 interface CompilationResponse{
   url: string;
@@ -76,19 +77,23 @@ export class RecipesService {
     return currentChapter;*/
   }
 
+  downloadBook(): void {
+    const blob = new Blob([JSON.stringify(this.recipes)], {type: 'text/plain;charset=utf-8'});
+    saveAs(blob, "Mein Kochbuch.txt");
+  }
 
   addRecipe(chapter: RecipesNode, urls: string): void {
     let url = '';
     for (let r of urls.split('\n')) {
-      if (r.startsWith('http')) {
+      if (r.startsWith('https://www.chefkoch.de/')) {
         url = r;
       } else if (!isNaN(Number(r))) {
-        // TODO build link from recipe ID
         url = 'https://www.chefkoch.de/rezepte/' + r;
       }
       this.scrapeRecipe(chapter, url);
     }
     chapter.isBottomChapter = true;
+    this.save();
   }
 
   scrapeRecipe(chapter: RecipesNode, url: string): void {
@@ -137,6 +142,7 @@ export class RecipesService {
       }
     };
     chapter.children.push(newChapter);
+    this.save();
   }
 
   save(): void {
@@ -154,6 +160,7 @@ export class RecipesService {
     if (parent.isBottomChapter && parent.children.length === 0) {
       parent.isBottomChapter = false;
     }
+    this.save();
   }
 
   requestCompilation(): void {

@@ -4,10 +4,10 @@ import {RecipesNode} from '../recipes-node';
 
 @Component({
   selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  templateUrl: './dialog-delete.component.html',
+  styleUrls: ['./dialog-delete.component.css']
 })
 
-export class DialogComponent {
+export class DialogDeleteComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: RecipesNode) {}
 }

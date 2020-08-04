@@ -7,6 +7,10 @@ import { RecipesService } from '../recipes.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Md5 } from 'ts-md5';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogDeleteComponent} from '../dialog-delete/dialog-delete.component';
+import {DialogAddRecipeComponent} from '../dialog-add-recipe/dialog-add-recipe.component';
+import {DialogAddChapterComponent} from '../dialog-add-chapter/dialog-add-chapter.component';
 
 @Component({
   selector: 'app-recipes-list',
@@ -25,7 +29,8 @@ export class RecipesListComponent implements OnInit {
 
 
   constructor(public recipesService: RecipesService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -48,7 +53,7 @@ export class RecipesListComponent implements OnInit {
 
 
 
-  openNewChapterModal(content, chapter: string): void {
+/*  openNewChapterModal(content, chapter: string): void {
     this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result === 's') {this.recipesService.addChapter(this.chapter, this.newChapterTitle); this.newChapterTitle = ''; }
@@ -59,6 +64,34 @@ export class RecipesListComponent implements OnInit {
     this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'nr-title'}).result.then((result) => {
       if (result === 's') {this.recipesService.addRecipe(this.chapter, this.newRecipeUrl); this.newRecipeUrl = ''; }
+    });
+  }*/
+
+  openAddRecipeDialog(chapter: string): void {
+    this.chapter = this.recipesService.getNodeById(chapter);
+
+    const dialogRef = this.dialog.open(DialogAddRecipeComponent, {
+      data: this.chapter
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.recipesService.addRecipe(this.chapter, result);
+      }
+    });
+  }
+
+  openAddChapterDialog(chapter: string): void {
+    this.chapter = this.recipesService.getNodeById(chapter);
+
+    const dialogRef = this.dialog.open(DialogAddChapterComponent, {
+      data: this.chapter
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.recipesService.addChapter(this.chapter, result);
+      }
     });
   }
 
