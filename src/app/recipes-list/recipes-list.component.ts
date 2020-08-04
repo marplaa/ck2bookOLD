@@ -10,6 +10,7 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogDeleteComponent} from '../dialog-delete/dialog-delete.component';
 import {DialogAddRecipeComponent} from '../dialog-add-recipe/dialog-add-recipe.component';
+import {DialogAddChapterComponent} from '../dialog-add-chapter/dialog-add-chapter.component';
 
 @Component({
   selector: 'app-recipes-list',
@@ -75,6 +76,19 @@ export class RecipesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
         this.recipesService.addRecipe(this.chapter, result);
+
+    });
+  }
+
+  openAddChapterDialog(chapter: string): void {
+    this.chapter = this.recipesService.getNodeById(chapter);
+
+    const dialogRef = this.dialog.open(DialogAddChapterComponent, {
+      data: this.chapter
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.recipesService.addChapter(this.chapter, result);
 
     });
   }

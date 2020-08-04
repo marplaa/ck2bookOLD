@@ -78,7 +78,7 @@
                   </ng-container>
 
                   <ng-container *ngIf="!isBottomChapter(node)">
-                    <button mat-icon-button (click)="openNewChapterModal(newChapterModal, node.id)">
+                    <button mat-icon-button (click)="openAddChapterDialog(node.id)">
                       <mat-icon>
                         book
                       </mat-icon>
