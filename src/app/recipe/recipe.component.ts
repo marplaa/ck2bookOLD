@@ -54,6 +54,10 @@ export class RecipeComponent implements OnInit {
   }
 
 
+  saveAndExit(): void {
+    this.recipesService.save();
+    this.router.navigateByUrl('/');
+  }
 
 
 }

@@ -33,6 +33,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import { DialogAddChapterComponent } from './dialog-add-chapter/dialog-add-chapter.component';
 import { DialogAddRecipeComponent } from './dialog-add-recipe/dialog-add-recipe.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -74,7 +75,8 @@ import { DialogAddRecipeComponent } from './dialog-add-recipe/dialog-add-recipe.
     MatMenuModule,
     MatCheckboxModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   entryComponents: [DialogDeleteComponent],
   providers: [],

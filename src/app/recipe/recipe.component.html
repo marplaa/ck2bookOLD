@@ -3,16 +3,17 @@
   <div class="row">
     <div class="col-12">
       <div id="navbar">
+        <button mat-raised-button color="warn" (click)="openDeleteDialog(recipe)">Rezept löschen</button>
 
-        <a routerLink="/"><button mat-raised-button color="primary">zurück</button></a>
+          <button class="float-right" mat-raised-button color="primary" (click)="saveAndExit()">Übernehmen</button>
 
-        <button mat-raised-button color="warn" class="float-right" (click)="openDeleteDialog(recipe)">Rezept löschen</button>
+
+
       </div>
 
 
     </div>
   </div>
-
 
 
   <div class="row">
@@ -26,7 +27,9 @@
 
       <app-image-list [node]="recipe" [images]="recipe.images"></app-image-list>
       <div style="height: 500px">
-        <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
+        <div style="height: 450px">
+          <quill-editor [modules]="modules" [(ngModel)]="recipe.text"></quill-editor>
+        </div>
       </div>
     </div>
     <div class="col-lg-3">

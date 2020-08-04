@@ -53,7 +53,7 @@ export class RecipesListComponent implements OnInit {
 
 
 
-  openNewChapterModal(content, chapter: string): void {
+/*  openNewChapterModal(content, chapter: string): void {
     this.chapter = this.recipesService.getNodeById(chapter);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result === 's') {this.recipesService.addChapter(this.chapter, this.newChapterTitle); this.newChapterTitle = ''; }
@@ -65,7 +65,7 @@ export class RecipesListComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'nr-title'}).result.then((result) => {
       if (result === 's') {this.recipesService.addRecipe(this.chapter, this.newRecipeUrl); this.newRecipeUrl = ''; }
     });
-  }
+  }*/
 
   openAddRecipeDialog(chapter: string): void {
     this.chapter = this.recipesService.getNodeById(chapter);
@@ -75,8 +75,9 @@ export class RecipesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result) {
         this.recipesService.addRecipe(this.chapter, result);
-
+      }
     });
   }
 
@@ -88,8 +89,9 @@ export class RecipesListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.recipesService.addChapter(this.chapter, result);
-
+      if (result) {
+        this.recipesService.addChapter(this.chapter, result);
+      }
     });
   }
 

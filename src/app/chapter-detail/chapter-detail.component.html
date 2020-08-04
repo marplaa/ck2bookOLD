@@ -4,13 +4,14 @@
   <div class="row">
     <div class="col-12">
       <div id="navbar">
-
-        <a routerLink="/">
-          <button mat-raised-button color="primary">zurück</button>
-        </a>
-
-        <button mat-flat-button color="warn" class="float-right" (click)="openDeleteDialog(chapter)">Kapitel löschen
+        <button mat-flat-button color="warn"  (click)="openDeleteDialog(chapter)">Kapitel löschen
         </button>
+
+
+          <button mat-raised-button class="float-right" color="primary" (click)="saveAndExit()">Übernehmen</button>
+
+
+
       </div>
 
 

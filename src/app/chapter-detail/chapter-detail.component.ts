@@ -54,4 +54,9 @@ export class ChapterDetailComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  saveAndExit(): void {
+    this.recipesService.save();
+    this.router.navigateByUrl('/');
+  }
+
 }
