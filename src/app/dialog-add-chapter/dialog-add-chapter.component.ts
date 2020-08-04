@@ -3,11 +3,12 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {RecipesNode} from '../recipes-node';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  selector: 'app-dialog-add-chapter',
+  templateUrl: './dialog-add-chapter.component.html',
+  styleUrls: ['./dialog-add-chapter.component.css']
 })
+export class DialogAddChapterComponent {
 
-export class DialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: RecipesNode) {}
+
 }

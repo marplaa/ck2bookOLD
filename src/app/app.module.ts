@@ -25,12 +25,14 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatDialogModule} from '@angular/material/dialog';
 import { RecipePreviewComponent } from './recipe-preview/recipe-preview.component';
 import { ChapterDetailComponent } from './chapter-detail/chapter-detail.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ChapterEntryComponent } from './recipes-list/chapter-entry/chapter-entry.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import { DialogAddChapterComponent } from './dialog-add-chapter/dialog-add-chapter.component';
+import { DialogAddRecipeComponent } from './dialog-add-recipe/dialog-add-recipe.component';
 
 
 
@@ -44,9 +46,13 @@ import {MatRadioModule} from '@angular/material/radio';
     ImageListComponent,
     RecipePreviewComponent,
     ChapterDetailComponent,
-    DialogComponent,
+    DialogDeleteComponent,
 
     ChapterEntryComponent,
+
+    DialogAddChapterComponent,
+
+    DialogAddRecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatCardModule,
     MatRadioModule
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogDeleteComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

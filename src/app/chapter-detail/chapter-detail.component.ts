@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {DialogComponent} from '../dialog/dialog.component';
+import {DialogDeleteComponent} from '../dialog-delete/dialog-delete.component';
 import {chapterImages} from '../chapter-images';
 
 
@@ -38,7 +38,7 @@ export class ChapterDetailComponent implements OnInit {
 
 
   openDeleteDialog(chapter: RecipesNode): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(DialogDeleteComponent, {
       data: chapter
     });
 

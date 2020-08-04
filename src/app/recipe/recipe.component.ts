@@ -3,7 +3,7 @@ import {Recipe, RecipesNode} from '../recipes-node';
 import { RecipesService } from '../recipes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
-import {DialogComponent} from '../dialog/dialog.component';
+import {DialogDeleteComponent} from '../dialog-delete/dialog-delete.component';
 import {MatDialog} from '@angular/material/dialog';
 
 
@@ -37,7 +37,7 @@ export class RecipeComponent implements OnInit {
   }
 
   openDeleteDialog(chapter: RecipesNode): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(DialogDeleteComponent, {
       data: chapter
     });
 
