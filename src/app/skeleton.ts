@@ -117,7 +117,7 @@ export const Recipes: RecipesNode =
 
   {
     id: '000',
-    title: 'root',
+    title: 'Mein Kochbuch',
     images: chapterImages.cooking,
     image: 'http://localhost:4200/assets/img/chapter-images/cooking_1.jpg',
     text: '',
