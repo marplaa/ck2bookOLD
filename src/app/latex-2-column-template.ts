@@ -10,6 +10,7 @@ export const twoColTemplate = {
     '\\usepackage{multicol}\n' +
     '\\setlength{\\columnsep}{0.6cm}\n' +
     '\\usepackage{tabulary}\n' +
+    '\\tymin=60pt\n' +
     '\\usepackage{graphicx}\n' +
     '\\usepackage{ulem}\n' +
     '\\usepackage{wrapfig}\n' +

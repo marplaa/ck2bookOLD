@@ -37,6 +37,7 @@ export class RendererService {
     const content = twoColTemplate.frame.replace('{{content}}', this.renderNode(node));
     const id = '' + Md5.hashStr(content);
     const images = this.imageList;
+    this.imageList = [];
     return {id, content, images};
   }
 
@@ -159,13 +160,14 @@ export class RendererService {
     text = text.replace(/%/g, '\\%');
 
     // console.log(newTag);
-    return text;
+    return this.texSave(text);
   }
 
 
   texSave(text: string): string {
     text = text.replace(/%/g, '\\%');
     text = text.replace(/⅛/g, '1/8');
+    text = text.replace(/\\/g, '\\\\');
     return text;
   }
 
